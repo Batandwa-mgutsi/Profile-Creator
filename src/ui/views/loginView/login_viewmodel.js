@@ -1,4 +1,5 @@
 import { BaseViewModel } from '../../../mvvm';
+import { authenticationService } from '../../../services/authenticationService'
 
 /**
  * ViewModel for the LoginVew
@@ -39,11 +40,20 @@ export default class LoginViewModel extends BaseViewModel {
      * 
      * TODO(Batandwa)
      */
-    login() {
+    async login() {
         console.log('Now logging in');
         this.setBusy(true);
         this.notifyListeners(this);
-        setTimeout(() => { this.setBusy(false); this.notifyListeners(this); }, 3000);
 
+        try {
+            await authenticationService.signInWithEmailAndPassword(this.email, this.password);
+        } catch (e) {
+            console.log(e);
+            console.trace();
+            alert(e);
+        }
+
+        this.setBusy(false)
+        this.notifyListeners(this);
     }
 }
