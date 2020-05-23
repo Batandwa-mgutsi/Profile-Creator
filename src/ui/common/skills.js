@@ -1,4 +1,4 @@
-import { SelectableSkill } from './models'
+import { SelectableSkill, SoftSkill } from './models'
 import Running from '../../image_assets/skill_icons/running.png'
 
 // TODO- Implement
@@ -23,6 +23,7 @@ export function getSelectableHardSkills() {
 
 export function getSelectableSoftSkills() {
     return [
-        'Talking To People',
+        new SoftSkill('Talking To People', 1, ''),
+        new SoftSkill('Eating Pizza', 1, ''),
     ];
 }

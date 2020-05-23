@@ -16,6 +16,7 @@ import "@reach/dialog/styles.css";
 import AddSchoolView from './widgets/add_school_view';
 import AddCompany from './widgets/add_company_view';
 import SelectSkillsView from './widgets/select_skills_view'
+import SelectSoftSkillView from './widgets/select_soft_skill_view'
 
 export default class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
@@ -234,7 +235,6 @@ export default class CreateProfileView extends ViewModelConsumer {
                             placeholder='Search hobies' />
                     </Dialog>
 
-
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addHardSkill} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <SelectSkillsView
                             onAddSkills={(skills) => {
@@ -244,6 +244,16 @@ export default class CreateProfileView extends ViewModelConsumer {
                             }}
                             skills={getSelectableHardSkills()}
                             placeholder='Search hard skills' />
+                    </Dialog>
+
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addSoftSkill} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <SelectSoftSkillView
+                            onSkillSelected={(skill) => {
+                                var softSkill = new SoftSkill(skill.name, 1, '');
+                                model.dismissCurrentDialog();
+                            }}
+                            softSkills={getSelectableSoftSkills()}
+                        />
                     </Dialog>
                 </DialogOverlay>
             </div>
