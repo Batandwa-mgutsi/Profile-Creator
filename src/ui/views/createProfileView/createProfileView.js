@@ -1,4 +1,4 @@
-import CreateProfileViewModel from './create_profile_viewmodel'
+import { CreateProfileViewModel, DialogToShow } from './create_profile_viewmodel'
 import { School, Company, HardSkill, SoftSkill, SocialMedia } from './models'
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
@@ -7,6 +7,12 @@ import '../../../materialize/css/materialize.css';
 import NoProfilePictureImg from '../../../image_assets/no_profile_picture.png'
 import YouTubeIcon from '../../../image_assets/youtube.png';
 import GithubIcon from '../../../image_assets/github.png';
+
+import { Dialog, DialogOverlay, DialogContent } from "@reach/dialog";
+import "@reach/dialog/styles.css";
+
+import AddSchoolView from './widgets/add_school_view';
+import AddSchoolViewModel from './widgets/add_school_viewmodel';
 
 export default class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
@@ -74,8 +80,10 @@ export default class CreateProfileView extends ViewModelConsumer {
 
                             <div className='divider' />
                             <br />
-                            <div style={{ textAlign: 'center' }}>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div style={{ textAlign: 'center', position: 'relative', zIndex: '0' }}>
+                                <div class='waves-effect waves-teal btn-flat' onClick={(e) => model.showDialog(DialogToShow.addSchool)}>
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +107,7 @@ export default class CreateProfileView extends ViewModelConsumer {
 
                             <div className='divider' />
                             <br />
-                            <div style={{ textAlign: 'center' }}>
+                            <div style={{ textAlign: 'center', position: 'relative', zIndex: '0' }}>
                                 <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
                             </div>
                         </div>
@@ -179,7 +187,14 @@ export default class CreateProfileView extends ViewModelConsumer {
                     </div>
                 </div>
             </div>
-
+            {/* The different dialogs */}
+            <div>
+                <DialogOverlay isOpen={model.dialogToShow !== DialogToShow.none}>
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addSchool} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <AddSchoolView onAddSchool={(school) => { model.addEducation(school); model.dismissCurrentDialog(); }} />
+                    </Dialog>
+                </DialogOverlay>
+            </div>
         </div>
     }
 

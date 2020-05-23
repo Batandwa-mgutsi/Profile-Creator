@@ -1,13 +1,15 @@
 import { BaseViewModel } from '../../../mvvm';
-import { School, Company, HardSkill, SoftSkill, SocialMedia } from './models'
+import { School, Company, HardSkill, SoftSkill } from './models'
+import { displayImage } from '../../utils'
 
 /**
  * ViewModel for the create profile view.
  */
-export default class CreateProfileViewModel extends BaseViewModel {
+export class CreateProfileViewModel extends BaseViewModel {
 
     constructor() {
         super();
+        this.dialogToShow = DialogToShow.none;
         this.youtubeLink = '';
         this.githubLink = '';
         this.developer = {
@@ -26,6 +28,8 @@ export default class CreateProfileViewModel extends BaseViewModel {
             softSkills: [],
         }
 
+        this.showDialog = this.showDialog.bind(this);
+        this.dismissCurrentDialog = this.dismissCurrentDialog.bind(this)
         this.setNameSurname = this.setNameSurname.bind(this);
         this.setShortBiography = this.setShortBiography.bind(this);
         this.setIsPublic = this.setIsPublic.bind(this);
@@ -49,9 +53,20 @@ export default class CreateProfileViewModel extends BaseViewModel {
         this.setGithubLink = this.setGithubLink.bind(this);
 
         this._rateSkill = this._rateSkill.bind(this);
-        this._displayimage = this._displayImage.bind(this);
     }
 
+    /**
+     * @param {Number} dialogToShow 
+     */
+    showDialog(dialogToShow) {
+        this.dialogToShow = dialogToShow;
+        this.notifyListeners(this);
+    }
+
+    dismissCurrentDialog() {
+        this.dialogToShow = DialogToShow.none;
+        this.notifyListeners(this);
+    }
 
     /**
      * 
@@ -84,12 +99,12 @@ export default class CreateProfileViewModel extends BaseViewModel {
     setProfilePicture(fileInputElement, targetId) {
         if (fileInputElement.files && fileInputElement.files[0]) {
             this.developer.profilePicture = fileInputElement.files[0];
-            this._displayImage(fileInputElement, targetId)
+            displayImage(fileInputElement, targetId)
         }
     }
 
     /**
-     * @param {School} school
+     * @param {School} school 
      */
     addEducation(school) {
         this.developer.education.push(school);
@@ -251,21 +266,14 @@ export default class CreateProfileViewModel extends BaseViewModel {
 
         this.notifyListeners(this);
     }
+}
 
-    /**
-     * Displays the selected file from the given input element in the target im element id
-     * @param {HTMLInputElement} input
-     * @param {String} targetId
-     */
-    _displayImage(input, targetId) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                document.getElementById(targetId).src = e.target.result;
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+export const DialogToShow = {
+    none: -1,
+    addSchool: 0,
+    addCompany: 1,
+    addTechnicalSkill: 2,
+    addHoby: 3,
+    addHardSkill: 4,
+    addSoftSkill: 5,
 }
