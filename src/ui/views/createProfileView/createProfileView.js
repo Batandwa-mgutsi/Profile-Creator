@@ -1,5 +1,6 @@
-import { CreateProfileViewModel, DialogToShow } from './create_profile_viewmodel'
-import { School, Company, HardSkill, SoftSkill, SocialMedia } from './models'
+import { CreateProfileViewModel, DialogToShow } from './create_profile_viewmodel';
+import { School, Company, SelectableSkill, HardSkill, SoftSkill, SocialMedia } from '../../common/models';
+import { getSelectableTechnicalSkills, getSelectableHardSkills, getSelectableHobies, getSelectableSoftSkills } from '../../common/skills';
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
 import '../../../materialize/css/materialize.css';
@@ -7,12 +8,14 @@ import '../../../materialize/css/materialize.css';
 import NoProfilePictureImg from '../../../image_assets/no_profile_picture.png'
 import YouTubeIcon from '../../../image_assets/youtube.png';
 import GithubIcon from '../../../image_assets/github.png';
+import Runninng from '../../../image_assets/skill_icons/running.png'
 
-import { Dialog, DialogOverlay, DialogContent } from "@reach/dialog";
+import { Dialog, DialogOverlay } from "@reach/dialog";
 import "@reach/dialog/styles.css";
 
 import AddSchoolView from './widgets/add_school_view';
 import AddCompany from './widgets/add_company_view';
+import SelectSkillsView from './widgets/select_skills_view'
 
 export default class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
@@ -121,14 +124,13 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Technical Skills</h4>
-                            {/* TODO: Implement rendering of techincal skills*/}
 
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
-                                <div class="waves-effect waves-teal btn-flat">
+                                <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addTechnicalSkill)}>
                                     <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
                                 </div>
                             </div>
@@ -138,14 +140,13 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Hobies/Extra - Curricular Activities</h4>
-                            {/* TODO: Implement rendering of techincal skills*/}
 
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
-                                <div class="waves-effect waves-teal btn-flat">
+                                <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addHoby)}>
                                     <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
                                 </div>
                             </div>
@@ -197,14 +198,52 @@ export default class CreateProfileView extends ViewModelConsumer {
                     </div>
                 </div>
             </div>
+
+
             {/* The different dialogs */}
             <div>
                 <DialogOverlay isOpen={model.dialogToShow !== DialogToShow.none}>
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addSchool} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <AddSchoolView onAddSchool={(school) => { model.addEducation(school); model.dismissCurrentDialog(); }} />
                     </Dialog>
+
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addCompany} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <AddCompany onAddCompany={(company) => { model.addExperience(company); model.dismissCurrentDialog(); }} />
+                    </Dialog>
+
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addTechnicalSkill} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <SelectSkillsView
+                            onAddSkills={(skills) => {
+                                var transformedSkills = skills.map((skl) => skl.name);
+                                model.addTechnicalSkillsFromArray(transformedSkills);
+                                model.dismissCurrentDialog();
+                            }}
+                            skills={getSelectableTechnicalSkills()}
+                            placeholder='Search techical skills' />
+                    </Dialog>
+
+
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addHoby} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <SelectSkillsView
+                            onAddSkills={(skills) => {
+                                var transformedSkills = skills.map((skl) => skl.name);
+                                model.addHobiesFromArray(transformedSkills);
+                                model.dismissCurrentDialog();
+                            }}
+                            skills={getSelectableHobies()}
+                            placeholder='Search hobies' />
+                    </Dialog>
+
+
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addHardSkill} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <SelectSkillsView
+                            onAddSkills={(skills) => {
+                                var transformedSkills = skills.map((skl) => new HardSkill(skl.name, 1, 1));
+                                model.addHardSkillsFromArray(transformedSkills);
+                                model.dismissCurrentDialog();
+                            }}
+                            skills={getSelectableHardSkills()}
+                            placeholder='Search hard skills' />
                     </Dialog>
                 </DialogOverlay>
             </div>

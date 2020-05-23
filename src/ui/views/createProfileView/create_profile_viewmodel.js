@@ -1,6 +1,6 @@
 import { BaseViewModel } from '../../../mvvm';
-import { School, Company, HardSkill, SoftSkill } from './models'
-import { displayImage } from '../../utils'
+import { School, Company, HardSkill, SoftSkill } from '../../common/models'
+import { displayImage } from '../../common/utils'
 
 /**
  * ViewModel for the create profile view.
@@ -51,6 +51,10 @@ export class CreateProfileViewModel extends BaseViewModel {
         this.setHardSkillExperience = this.setHardSkillExperience.bind(this);
         this.setYouTubeLink = this.setYouTubeLink.bind(this);
         this.setGithubLink = this.setGithubLink.bind(this);
+
+        this.addTechnicalSkillsFromArray = this.addTechnicalSkillsFromArray.bind(this);
+        this.addHobiesFromArray = this.addHobiesFromArray.bind(this);
+        this.addHardSkillsFromArray = this.addHardSkillsFromArray.bind(this);
 
         this._rateSkill = this._rateSkill.bind(this);
     }
@@ -140,6 +144,30 @@ export class CreateProfileViewModel extends BaseViewModel {
      */
     addTechnicalSkill(technicalSkill) {
         this.developer.technicalSkills.push(technicalSkill);
+        this.notifyListeners(this);
+    }
+
+    /**
+     * @param {Array<String>} technicalSkills
+     */
+    addTechnicalSkillsFromArray(technicalSkills) {
+        this.developer.technicalSkills = this.developer.technicalSkills.concat(technicalSkills);
+        this.notifyListeners(this);
+    }
+
+    /**
+     * @param {Array<String>} hobies
+     */
+    addHobiesFromArray(hobies) {
+        this.developer.hobies = this.developer.hobies.concat(hobies);
+        this.notifyListeners(this);
+    }
+
+    /**
+     * @param {Array<HardSkill>} hardSkills
+     */
+    addHardSkillsFromArray(hardSkills) {
+        this.developer.hardSkills = this.developer.hardSkills.concat(hardSkills);
         this.notifyListeners(this);
     }
 

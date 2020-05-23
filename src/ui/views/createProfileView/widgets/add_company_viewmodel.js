@@ -1,6 +1,6 @@
 import { BaseViewModel } from '../../../../mvvm';
-import { Company } from '../models'
-import { displayImage } from '../../../utils'
+import { Company } from '../../../common/models'
+import { displayImage } from '../../../common/utils'
 
 /**
  * ViewModel forthe Add Company View

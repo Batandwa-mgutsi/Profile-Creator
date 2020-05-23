@@ -1,6 +1,6 @@
 import { BaseViewModel } from '../../../../mvvm';
-import { School } from '../models'
-import { displayImage } from '../../../utils'
+import { School } from '../../../common/models'
+import { displayImage } from '../../../common/utils'
 
 
 /**

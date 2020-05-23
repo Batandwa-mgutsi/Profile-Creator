@@ -17,3 +17,12 @@ export function displayImage(input, targetId) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+/**
+ * Returns {list} with {item} removed.
+ * @param {Array} list
+ * @param {any} item
+ */
+export function removeItemFromList(list, item) {
+    return list.splice(list.findIndex((itm) => itm === item), 1);
+}

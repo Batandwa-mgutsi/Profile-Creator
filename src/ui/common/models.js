@@ -41,3 +41,11 @@ export class SocialMedia {
         this.link = link;
     }
 }
+
+// Used by SelectSkillView
+export class SelectableSkill {
+    constructor(name, iconSrc) {
+        this.name = name;
+        this.iconSrc = iconSrc;
+    }
+}
