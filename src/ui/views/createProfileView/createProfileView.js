@@ -12,7 +12,7 @@ import { Dialog, DialogOverlay, DialogContent } from "@reach/dialog";
 import "@reach/dialog/styles.css";
 
 import AddSchoolView from './widgets/add_school_view';
-import AddSchoolViewModel from './widgets/add_school_viewmodel';
+import AddCompany from './widgets/add_company_view';
 
 export default class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
@@ -65,22 +65,23 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Education</h4>
-                            {
-                                model.developer.education.map((school) => {
-                                    return <div>
-                                        <div className='col s11'>
-                                            {this.getSchoolView(school)}
+                            <div className='col s12'>
+                                {
+                                    model.developer.education.map((school) => {
+                                        return <div>
+                                            <div className='col s11'>
+                                                {this.getSchoolView(school)}
+                                            </div>
+                                            <div className='col s1'>
+                                                h
+                                    </div>
                                         </div>
-                                        <div className='col s1'>
-                                            h
-                                    </div>
-                                    </div>
-                                })
-                            }
+                                    })
+                                }
+                            </div>
 
-                            <div className='divider' />
-                            <br />
-                            <div style={{ textAlign: 'center', position: 'relative', zIndex: '0' }}>
+                            <div className='divider col s12' style={{ marginBottom: '10px' }} />
+                            <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }}>
                                 <div class='waves-effect waves-teal btn-flat' onClick={(e) => model.showDialog(DialogToShow.addSchool)}>
                                     <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
                                 </div>
@@ -92,23 +93,26 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Experience</h4>
-                            {
-                                model.developer.experience.map((company) => {
-                                    return <div>
-                                        <div className='col s11'>
-                                            {this.getCompanyView(company)}
+                            <div className='col s12'>
+                                {
+                                    model.developer.experience.map((company) => {
+                                        return <div>
+                                            <div className='col s11'>
+                                                {this.getCompanyView(company)}
+                                            </div>
+                                            <div className='col s1'>
+                                                h
+                                    </div>
                                         </div>
-                                        <div className='col s1'>
-                                            h
-                                    </div>
-                                    </div>
-                                })
-                            }
+                                    })
+                                }
+                            </div>
 
-                            <div className='divider' />
-                            <br />
-                            <div style={{ textAlign: 'center', position: 'relative', zIndex: '0' }}>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div className='divider col s12' style={{ marginBottom: '10px' }} />
+                            <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }} >
+                                <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addCompany)}>
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,8 +127,10 @@ export default class CreateProfileView extends ViewModelConsumer {
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
-                            <div className='col s2'>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
+                                <div class="waves-effect waves-teal btn-flat">
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,8 +144,10 @@ export default class CreateProfileView extends ViewModelConsumer {
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
                             <h5 className='col s2'>hhh</h5>
-                            <div className='col s2'>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
+                                <div class="waves-effect waves-teal btn-flat">
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -149,10 +157,11 @@ export default class CreateProfileView extends ViewModelConsumer {
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Hard Skills</h4>
 
-                            <div className='divider' />
-                            <br />
-                            <div style={{ textAlign: 'center' }}>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div className='divider col s12' style={{ marginBottom: '10px' }} />
+                            <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }} >
+                                <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addHardSkill)}>
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -162,10 +171,11 @@ export default class CreateProfileView extends ViewModelConsumer {
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Soft Skills</h4>
 
-                            <div className='divider' />
-                            <br />
-                            <div style={{ textAlign: 'center' }}>
-                                <a class="waves-effect waves-teal btn-flat"><i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i></a>
+                            <div className='divider col s12' style={{ marginBottom: '10px' }} />
+                            <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }} >
+                                <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addSoftSkill)}>
+                                    <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -192,6 +202,9 @@ export default class CreateProfileView extends ViewModelConsumer {
                 <DialogOverlay isOpen={model.dialogToShow !== DialogToShow.none}>
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addSchool} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <AddSchoolView onAddSchool={(school) => { model.addEducation(school); model.dismissCurrentDialog(); }} />
+                    </Dialog>
+                    <Dialog isOpen={model.dialogToShow === DialogToShow.addCompany} onDismiss={(e) => model.dismissCurrentDialog()}>
+                        <AddCompany onAddCompany={(company) => { model.addExperience(company); model.dismissCurrentDialog(); }} />
                     </Dialog>
                 </DialogOverlay>
             </div>
