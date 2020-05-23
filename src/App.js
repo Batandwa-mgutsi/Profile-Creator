@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginView from './ui/views/loginView/login_view';
+import CreateProfileView from './ui/views/createProfileView/createProfileView';
 
 function App() {
   return (
@@ -9,6 +10,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <LoginView />
+          </Route>
+          <Route path='/createProfile'>
+            <CreateProfileView />
           </Route>
         </Switch>
       </Router>

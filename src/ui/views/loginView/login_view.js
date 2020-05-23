@@ -3,7 +3,7 @@ import { ViewModelConsumer } from '../../../mvvm';
 import '../../../materialize/css/materialize.css';
 import LoginViewModel from './login_viewmodel';
 
-export default class HomeView extends ViewModelConsumer {
+export default class LoginView extends ViewModelConsumer {
     constructor(props) {
         super(props, new LoginViewModel());
     }
