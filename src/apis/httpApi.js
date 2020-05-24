@@ -44,6 +44,21 @@ export async function patch(url, data, keyToReturn, headers = {}) {
     return await _fetchWithData(url, 'PATCH', data, keyToReturn, headers);
 }
 
+
+/**
+ * Makes a http PUT request to the given URL.
+ * 
+ * Returns the response as json on success, else an error object is thrown.
+ * 
+ * @param {String} url
+ * @param {Map} headers
+ * @param {any} data
+ * @param {String} keyToReturn
+ */
+export async function put(url, data, keyToReturn, headers = {}) {
+    return await _fetchWithData(url, 'PUT', data, keyToReturn, headers);
+}
+
 /**
  * @param {String} url
  * @param {String} method
