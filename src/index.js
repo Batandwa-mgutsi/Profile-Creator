@@ -8,7 +8,11 @@ import routes from './router'
 
 ReactDOM.render(
   <React.StrictMode>
-    {routes}
+    <div>
+      <center>
+        <h2>Hello World!</h2>
+      </center>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
