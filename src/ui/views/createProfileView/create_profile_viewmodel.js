@@ -364,6 +364,7 @@ export class CreateProfileViewModel extends BaseViewModel {
 
         try {
             await developersApi.createProfile(this.developer, await authenticationService.getCurrentUser());
+            window.location = 'profiles'
         } catch (e) {
             console.log(e);
             console.trace();
