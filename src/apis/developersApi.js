@@ -45,3 +45,5 @@ export class DevelopersApi {
         return get(endpoint, 'developer');
     }
 }
+
+export const developersApi = new DevelopersApi();

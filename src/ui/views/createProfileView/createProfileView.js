@@ -244,13 +244,22 @@ export default class CreateProfileView extends ViewModelConsumer {
                             </div>
                         </div>
                     </div>
+
+                    <div className='row' >
+                        <div style={{ float: 'right', paddingTop: '20px' }}>
+                            {!model.isBusy() ?
+                                <div className='btn' onClick={(e) => model.saveProfile()}>Save</div>
+                                : <div className='btn' disabled>Save</div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
             {/* The different dialogs */}
             <div>
-                <DialogOverlay isOpen={model.dialogToShow !== DialogToShow.none}>
+                <DialogOverlay isOpen={(model.dialogToShow !== DialogToShow.none) || model.isBusy()}>
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addSchool} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <AddSchoolView onAddSchool={(school) => { model.addEducation(school); model.dismissCurrentDialog(); }} />
                     </Dialog>
@@ -303,6 +312,13 @@ export default class CreateProfileView extends ViewModelConsumer {
                             softSkills={getSelectableSoftSkills()}
                         />
                     </Dialog>
+
+                    <Dialog isOpen={model.isBusy()}>
+                        <div className="progress">
+                            <div className="indeterminate"></div>
+                        </div>}
+                    </Dialog>
+
                 </DialogOverlay>
             </div>
         </div>

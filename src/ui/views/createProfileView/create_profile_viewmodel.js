@@ -2,6 +2,9 @@ import { BaseViewModel } from '../../../mvvm';
 import { School, Company, HardSkill, SoftSkill } from '../../common/models'
 import { displayImage } from '../../common/utils'
 
+import { authenticationService } from '../../../services/authenticationService'
+import { developersApi } from '../../../apis/developersApi'
+
 /**
  * ViewModel for the create profile view.
  */
@@ -58,6 +61,8 @@ export class CreateProfileViewModel extends BaseViewModel {
         this.addHardSkillsFromArray = this.addHardSkillsFromArray.bind(this);
 
         this._rateSkill = this._rateSkill.bind(this);
+
+        this.saveProfile = this.saveProfile.bind(this);
     }
 
     /**
@@ -306,6 +311,66 @@ export class CreateProfileViewModel extends BaseViewModel {
             this.developer.hardSkills[index] = updatedSkill;
         }
 
+        this.notifyListeners(this);
+    }
+
+    /**
+     * Save the developer profile
+     */
+    async saveProfile() {
+        this.setBusy(true);
+        this.notifyListeners(this);
+
+        // If files have been selected, encode them in base 64
+        // else remove the properties
+
+        // See: https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        // Profile Picture
+        if (this.developer.profilePicture != null) {
+            this.developer.profilePicture = toBase64(this.developer.profilePicture);
+        } else {
+            delete this.developer.profilePicture;
+        }
+
+        // School Logos
+        for (var schoolIndex in this.developer.education) {
+            var school = this.developer.education[schoolIndex];
+            if (school.schoolLogo != null) {
+                this.developer.education[schoolIndex].schoolLogo = toBase64(school.schoolLogo);
+            } else {
+                delete this.developer.education[schoolIndex].schoolLogo;
+            }
+        }
+
+        // Company Logos
+        for (var companyIndex in this.developer.experience) {
+            var company = this.developer.experience[companyIndex];
+            if (company.companyLogo != null) {
+                this.developer.experience[companyIndex].companyLogo = toBase64(company.companyLogo);
+            } else {
+                delete this.developer.experience[companyIndex].companyLogo;
+            }
+        }
+
+
+        // Save the developer
+
+        try {
+            await developersApi.createProfile(this.developer, await authenticationService.getCurrentUser());
+        } catch (e) {
+            console.log(e);
+            console.trace();
+            alert('Error ' + e.message);
+        }
+
+        this.setBusy(false)
         this.notifyListeners(this);
     }
 }

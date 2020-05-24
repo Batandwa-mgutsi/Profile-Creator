@@ -83,9 +83,10 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
  * @param {String} keyToReturn
  */
 async function _checkForError(response, keyToReturn) {
-    console.log(await response.text());
+    var text = await response.text();
+    console.log(text);
     if (response.status !== 200) {
-        throw Error('An Error occured '.concat(response.status));
+        throw Error('An Error occured: ' + response.status + ' - ' + text);
     } else {
         var json = await response.json();
         return JSON.parse(json[keyToReturn]);
