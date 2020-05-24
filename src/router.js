@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginView from './ui/views/loginView/login_view';
 import CreateProfileView from './ui/views/createProfileView/createProfileView';
 import ProfilesView from './ui/views/profilesView/profilesView';
