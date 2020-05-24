@@ -16,7 +16,7 @@
     "react-star-rating-component": "^1.4.1"
   },
   "engines": {
-    "yarn": "1.17.3",
+    "npm": "6.9.0",
     "node": "10.16.3"
   },
   "scripts": {
