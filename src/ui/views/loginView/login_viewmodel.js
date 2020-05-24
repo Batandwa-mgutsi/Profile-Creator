@@ -50,7 +50,7 @@ export default class LoginViewModel extends BaseViewModel {
         } catch (e) {
             console.log(e);
             console.trace();
-            alert(e);
+            alert('Error ' + e.message);
         }
 
         this.setBusy(false)

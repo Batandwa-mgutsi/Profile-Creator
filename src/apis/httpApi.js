@@ -55,7 +55,7 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
     const response = await fetch(url, {
         method: method,
         headers: headers,
-        mode: 'no-cors',
+        mode: 'cors',
         body: JSON.stringify(data)
     });
 
@@ -69,17 +69,10 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
  */
 async function _checkForError(response, keyToReturn) {
     console.log(await response.text());
-    if (response.status === 404)
-        throw Error('404- Requested endpoint not found');
-
-    var json = await response.json();
     if (response.status !== 200) {
-        var error = Object.assign(new Error(json?.errorMessage), {
-            errorMessage: json?.errorMessage,
-            status: response.status,
-        })
-        throw error;
+        throw Error('An Error occured '.concat(response.status));
     } else {
+        var json = await response.json();
         return JSON.parse(json[keyToReturn]);
     }
 }

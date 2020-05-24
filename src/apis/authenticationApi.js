@@ -14,7 +14,7 @@ export class AuthenticationApi {
      * @param {String} password
      */
     async signInWithEmailAndPassword(email, password) {
-        var endpoint = 'https://javaprime-week1-api.herokuapp.com/signin';
+        var endpoint = 'https://javaprime-week1-api.herokuapp.com/login/admin';
         var data = {
             userName: email,
             password: password,
