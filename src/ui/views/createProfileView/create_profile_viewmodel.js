@@ -48,6 +48,7 @@ export class CreateProfileViewModel extends BaseViewModel {
         this.removeSoftSkill = this.removeSoftSkill.bind(this);
         this.rateHardSkill = this.rateHardSkill.bind(this);
         this.rateSoftSkill = this.rateSoftSkill.bind(this);
+        this.updateSoftSkillDescription = this.updateSoftSkillDescription.bind(this);
         this.setHardSkillExperience = this.setHardSkillExperience.bind(this);
         this.setYouTubeLink = this.setYouTubeLink.bind(this);
         this.setGithubLink = this.setGithubLink.bind(this);
@@ -242,6 +243,19 @@ export class CreateProfileViewModel extends BaseViewModel {
      */
     rateSoftSkill(softSkill, rating) {
         this._rateSkill(softSkill, rating, true);
+    }
+
+    /**
+     * 
+     * @param {SoftSkill} softSkill 
+     * @param {String} newDescription 
+     */
+    updateSoftSkillDescription(softSkill, newDescription) {
+        softSkill.description = newDescription;
+        var index = this.developer.softSkills.findIndex((skl) => skl.id == softSkill.id);
+        this.developer.softSkills[index] = softSkill;
+
+        this.notifyListeners(this);
     }
 
     /**

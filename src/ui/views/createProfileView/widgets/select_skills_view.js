@@ -1,8 +1,9 @@
 import React from 'react';
 import SelectSkillsViewModel from './select_skills_viewmodel';
 import { ViewModelConsumer } from '../../../../mvvm';
-import '../../../../materialize/css/materialize.css';
 import { SelectableSkill } from '../../../common/models';
+
+import IconifiedSkillDisplay from '../../../shared_widgets/iconified_skill_display'
 
 export default class SelectSkillsView extends ViewModelConsumer {
     constructor(props) {
@@ -32,7 +33,7 @@ export default class SelectSkillsView extends ViewModelConsumer {
                                 model.isSelected(skill) ?
                                     model.unselectSkill(skill) : model.selectSkill(skill)
                             }}>
-                                {SelectableSkillView(skill, model.isSelected(skill))}
+                                {IconifiedSkillDisplay(skill.iconSrc, skill.name, model.isSelected(skill))}
                             </div>
                         })
                     }
@@ -46,27 +47,4 @@ export default class SelectSkillsView extends ViewModelConsumer {
 
         </div>
     }
-}
-
-/**
- * @param {SelectableSkill} skill
- * @param {Boolean} isSelected
- */
-function SelectableSkillView(skill, isSelected) {
-    return <div className='row' style={{
-        background: '#FFFFFF00 0% 0% no-repeat padding-box',
-        border: isSelected ? '4px solid #051F74' : '0px', borderRadius: '16px',
-        margin: 'auto'
-    }}>
-        <div className='col s2' style={{ margin: 'auto' }}>
-            <div>
-                <img className='responsive-img' src={skill.iconSrc} style={{ maxWidth: '94.5px', maxHeight: '78px' }} />
-            </div>
-            <div style={{ textAlign: 'end' }}>
-                <p style={{ color: '#585858FA', fontWeight: 'bold' }}>
-                    {skill.name}
-                </p>
-            </div>
-        </div>
-    </div>
 }

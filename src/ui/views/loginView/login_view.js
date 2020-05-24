@@ -1,6 +1,5 @@
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
-import '../../../materialize/css/materialize.css';
 import LoginViewModel from './login_viewmodel';
 
 export default class LoginView extends ViewModelConsumer {

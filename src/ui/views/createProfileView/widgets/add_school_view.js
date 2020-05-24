@@ -25,7 +25,7 @@ export default class AddSchool extends ViewModelConsumer {
             <div style={{ textAlign: 'center' }} >
                 <img id='schoolLogoSelectDisplay' src={model.school.schoolLogo ?? NoSchoolLogo} alt='School Logo' style={{ height: '190', width: '190px', }} onClick={(e) => document.getElementById('schoolLogoFileElem').click()} />
             </div>
-            <div className='col' >
+            <div className='col s5' >
                 <input type='text' placeholder='School Name' value={model.school.schoolName} onChange={(e) => model.setSchoolName(e.target.value)} />
                 <input type='text' placeholder='Location' value={model.school.schoolLocation} onChange={(e) => model.setLocation(e.target.value)} />
                 <input type='text' placeholder='Fields Of Study' value={model.school.fieldsOfStudy} onChange={(e) => model.setFieldsOfStudy(e.target.value)} />

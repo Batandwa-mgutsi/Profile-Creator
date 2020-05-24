@@ -18,6 +18,12 @@ import AddCompany from './widgets/add_company_view';
 import SelectSkillsView from './widgets/select_skills_view'
 import SelectSoftSkillView from './widgets/select_soft_skill_view'
 
+import SchoolDisplayView from '../../shared_widgets/school_display_view'
+import CompanyDisplayView from '../../shared_widgets/company_display_view'
+import IconifiedSkillDisplay from '../../shared_widgets/iconified_skill_display'
+import SoftSkillDisplay from '../../shared_widgets/soft_skill_display'
+import HardSkillDisplay from '../../shared_widgets/hard_skill_display'
+
 export default class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
         super(props, new CreateProfileViewModel());
@@ -74,7 +80,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                                     model.developer.education.map((school) => {
                                         return <div>
                                             <div className='col s11'>
-                                                {this.getSchoolView(school)}
+                                                <SchoolDisplayView key={school.schoolName.concat(school.schoolLocation)} school={school} schoolLogoIsFile={school.schoolLogo != null} />
                                             </div>
                                             <div className='col s1'>
                                                 h
@@ -102,7 +108,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                                     model.developer.experience.map((company) => {
                                         return <div>
                                             <div className='col s11'>
-                                                {this.getCompanyView(company)}
+                                                <CompanyDisplayView key={company.companyName} company={company} companyNameIsFile={company.companyLogo != null} />
                                             </div>
                                             <div className='col s1'>
                                                 h
@@ -125,11 +131,14 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Technical Skills</h4>
-
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
+                            {
+                                model.developer.technicalSkills.map((skillName) => {
+                                    var skill = getSelectableTechnicalSkills().find((item => item.name == skillName));
+                                    return <div className='col'>
+                                        {IconifiedSkillDisplay(skill.iconSrc)}
+                                    </div>
+                                })
+                            }
                             <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
                                 <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addTechnicalSkill)}>
                                     <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
@@ -142,10 +151,14 @@ export default class CreateProfileView extends ViewModelConsumer {
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Hobies/Extra - Curricular Activities</h4>
 
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
-                            <h5 className='col s2'>hhh</h5>
+                            {
+                                model.developer.hobies.map((hobbyName) => {
+                                    var hobby = getSelectableHobies().find((item => item.name == hobbyName));
+                                    return <div className='col'>
+                                        {IconifiedSkillDisplay(hobby.iconSrc, hobby.name)}
+                                    </div>
+                                })
+                            }
                             <div className='col s2' style={{ position: 'relative', zIndex: '0' }}>
                                 <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addHoby)}>
                                     <i className='material-icons' style={{ fontSize: '60px', color: 'teal' }}>add</i>
@@ -158,7 +171,20 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Hard Skills</h4>
-
+                            <div className='col s12' style={{ marginBottom: '10px' }}>
+                                {
+                                    model.developer.hardSkills.map((hardSkill) => {
+                                        return <div className='col s2'>
+                                            <HardSkillDisplay
+                                                isEditable={true}
+                                                key={hardSkill.id}
+                                                hardSkill={hardSkill}
+                                                onRatingChanged={(newRating) => model.rateHardSkill(hardSkill, newRating)}
+                                            />
+                                        </div>
+                                    })
+                                }
+                            </div>
                             <div className='divider col s12' style={{ marginBottom: '10px' }} />
                             <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }} >
                                 <div class="waves-effect waves-teal btn-flat" onClick={(e) => model.showDialog(DialogToShow.addHardSkill)}>
@@ -170,8 +196,29 @@ export default class CreateProfileView extends ViewModelConsumer {
 
 
                     <div className='row'>
-                        <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
+                        <div className='col s12 section' style={{ border: '1px solid #707070', color: '#585858FA', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Soft Skills</h4>
+
+                            <div className='col s12'>
+                                {
+                                    model.developer.softSkills.map((softSkill) => {
+                                        return <div>
+                                            <div className='col s12' style={{ fontSize: '24px', marginBottom: '10px' }}>{softSkill.id}</div>
+                                            <div className='col s11'>
+                                                <SoftSkillDisplay
+                                                    isEditable={true}
+                                                    key={softSkill.id}
+                                                    softSkill={softSkill}
+                                                    onDescriptionChanged={(newDescription) => model.updateSoftSkillDescription(softSkill, newDescription)}
+                                                    onRatingChanged={(newRating) => model.rateSoftSkill(softSkill, newRating)} />
+                                            </div>
+                                            <div className='col s1'>
+                                                h
+                                            </div>
+                                        </div>
+                                    })
+                                }
+                            </div>
 
                             <div className='divider col s12' style={{ marginBottom: '10px' }} />
                             <div className='col s12' style={{ textAlign: 'center', position: 'relative', zIndex: '0' }} >
@@ -184,7 +231,7 @@ export default class CreateProfileView extends ViewModelConsumer {
 
                     <div className='row'>
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
-                            <h4 style={this.getSectionHeaderStyle()} >Socila Media</h4>
+                            <h4 style={this.getSectionHeaderStyle()} >Social Media</h4>
 
                             <div className='col s12' style={{ position: 'relative' }}>
                                 <img className='col' src={YouTubeIcon} alt='YouTube' style={{ height: '81px', width: '116px', }} />
@@ -249,7 +296,8 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <Dialog isOpen={model.dialogToShow === DialogToShow.addSoftSkill} onDismiss={(e) => model.dismissCurrentDialog()}>
                         <SelectSoftSkillView
                             onSkillSelected={(skill) => {
-                                var softSkill = new SoftSkill(skill.name, 1, '');
+                                skill.description = 'click here to edit ';
+                                model.addSoftSkill(skill);
                                 model.dismissCurrentDialog();
                             }}
                             softSkills={getSelectableSoftSkills()}
@@ -273,7 +321,7 @@ export default class CreateProfileView extends ViewModelConsumer {
      * @param {School} school
      */
     getSchoolView(school) {
-        return <h1>{school.schoolName}</h1>
+        return
     }
 
     /**

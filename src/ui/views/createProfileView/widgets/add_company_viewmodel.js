@@ -46,7 +46,7 @@ export default class AddCompanyViewModel extends BaseViewModel {
      * @param {String} jobDescription
      */
     setJobDescription(jobDescription) {
-        this.jobDescription = jobDescription;
+        this.company.jobDescription = jobDescription;
         this.notifyListeners(this);
     }
 

@@ -1,5 +1,8 @@
 import { SelectableSkill, SoftSkill } from './models'
 import Running from '../../image_assets/skill_icons/running.png'
+import SelfMotivation from '../../image_assets/skill_icons/self_motivation.png'
+import Java from '../../image_assets/skill_icons/java.png'
+
 
 // TODO- Implement
 export function getSelectableTechnicalSkills() {
@@ -26,4 +29,19 @@ export function getSelectableSoftSkills() {
         new SoftSkill('Talking To People', 1, ''),
         new SoftSkill('Eating Pizza', 1, ''),
     ];
+}
+
+/**
+ * @param {String} softSkillId 
+ */
+export function getSoftSkillIconById(softSkillId) {
+    return SelfMotivation;
+}
+
+
+/**
+ * @param {String} hardSkillId 
+ */
+export function getHardSkillIconById(hardSkillId) {
+    return Java;
 }
