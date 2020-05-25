@@ -71,8 +71,7 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
     console.log(data);
     const response = await fetch(url, {
         method: method,
-        headers: headers,
-        mode: 'cors',
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
 
@@ -86,11 +85,13 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
  */
 async function _checkForError(response, keyToReturn) {
     var text = await response.text();
-    console.log(text);
+    console.log('Error checking response:', text);
+    console.log('Error checking status:', response.status);
+    console.log('Error res:', response);
     if (response.status !== 200) {
-        throw Error('An Error occured: ' + response.status + ' - ' + text);
+        throw Error('An Error occurred: ' + response.status + ' - ' + text);
     } else {
-        var json = JSON.parse(text);
+        var json = JSON.parse(text)
         return json[keyToReturn];
     }
 }
