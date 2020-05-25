@@ -67,6 +67,8 @@ export async function put(url, data, keyToReturn, headers = {}) {
  * @param {String} keyToReturn
  */
 async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
+    headers['Content-Type'] = 'application/json';
+    console.log(data);
     const response = await fetch(url, {
         method: method,
         headers: headers,
@@ -88,7 +90,7 @@ async function _checkForError(response, keyToReturn) {
     if (response.status !== 200) {
         throw Error('An Error occured: ' + response.status + ' - ' + text);
     } else {
-        var json = await response.json();
-        return JSON.parse(json[keyToReturn]);
+        var json = JSON.parse(text);
+        return json[keyToReturn];
     }
 }
