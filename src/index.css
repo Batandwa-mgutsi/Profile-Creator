@@ -18,3 +18,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* When the short developer profile viewer is hovered */
+.short-profile:hover {
+  box-shadow: '0px 0px 0px #00000029'
+}

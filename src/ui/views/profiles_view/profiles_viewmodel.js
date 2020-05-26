@@ -1,5 +1,5 @@
 import { developersApi } from '../../../apis/developers_api';
-import { authenticationApi } from '../../../apis/authentication_api';
+import { developersService } from '../../../services/developers_service';
 import AuthenticatedViewModel from '../authenticated_viewmodel';
 
 /**
@@ -40,6 +40,10 @@ export default class ProfilesViewModel extends AuthenticatedViewModel {
         return output;
     }
 
+    async onViewMounted() {
+        await this.fetchDevelopers();
+    }
+
     /**
      * @return {Array}
      */
@@ -48,7 +52,8 @@ export default class ProfilesViewModel extends AuthenticatedViewModel {
         this.notifyListeners(this);
 
         try {
-            this.developers = await developersApi.listDevelopers(await authenticationApi.getCurrentUser());
+            // TODO(FIX when done with the view)
+            this.developers = await developersService.listDevelopers();
         } catch (e) {
             console.log(e);
             console.trace();
