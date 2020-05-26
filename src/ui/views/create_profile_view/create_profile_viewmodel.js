@@ -375,7 +375,6 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
 
         try {
             await developersService.createProfile(this.developer);
-            console.log(JSON.stringify(this.developer));
             window.location = 'profiles'
         } catch (e) {
             console.log(e);

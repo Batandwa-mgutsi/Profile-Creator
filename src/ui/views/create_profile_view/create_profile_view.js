@@ -316,7 +316,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <Dialog isOpen={model.isBusy()}>
                         <div className="progress">
                             <div className="indeterminate"></div>
-                        </div>}
+                        </div>
                     </Dialog>
 
                 </DialogOverlay>
