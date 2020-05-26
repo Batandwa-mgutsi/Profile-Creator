@@ -358,11 +358,24 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
             }
         }
 
+        // Add social media links
+        this.developer.socialMedia = [
+            {
+                name: 'youtube',
+                link: this.youtubeLink
+            },
+            {
+                name: 'github',
+                link: this.githubLink,
+            }
+        ];
+
 
         // Save the developer
 
         try {
             await developersService.createProfile(this.developer);
+            console.log(JSON.stringify(this.developer));
             window.location = 'profiles'
         } catch (e) {
             console.log(e);
