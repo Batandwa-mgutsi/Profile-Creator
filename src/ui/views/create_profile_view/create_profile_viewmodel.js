@@ -1,9 +1,8 @@
 import AuthenticatedViewModel from '../authenticated_viewmodel';
-import { School, Company, HardSkill, SoftSkill } from '../../common/models'
-import { displayImage } from '../../common/utils'
+import { School, Company, HardSkill, SoftSkill } from '../../common/models';
+import { displayImage } from '../../common/utils';
 
-import { authenticationService } from '../../../services/authentication_service'
-import { developersApi } from '../../../apis/developers_api'
+import { developersService } from '../../../services/developers_service';
 
 /**
  * ViewModel for the create profile view.
@@ -363,7 +362,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         // Save the developer
 
         try {
-            await developersApi.createProfile(this.developer, await authenticationService.getCurrentUser());
+            await developersService.createProfile(this.developer);
             window.location = 'profiles'
         } catch (e) {
             console.log(e);

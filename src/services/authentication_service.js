@@ -14,7 +14,6 @@ export class AuthenticationService {
      * Returns the currently signed in user, null if there is non
      */
     async getCurrentUser() {
-        alert(JSON.stringify(this.__currentUser));
         return this.__currentUser;
     }
 
