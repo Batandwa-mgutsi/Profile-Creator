@@ -1,11 +1,11 @@
 import { developersApi } from '../../../apis/developersApi';
 import { authenticationApi } from '../../../apis/authenticationApi';
-import { BaseViewModel } from '../../../mvvm';
+import AuthenticatedViewModel from '../../views/authenticated_viewmodel';
 
 /**
  * ViewModel for the profiles view
  */
-export default class ProfilesViewModel extends BaseViewModel {
+export default class ProfilesViewModel extends AuthenticatedViewModel {
     constructor() {
         super();
 

@@ -22,6 +22,8 @@ export class BaseViewModel {
         this.subscribe = this.subscribe.bind(this);
         this.clearSubscriptions = this.clearSubscriptions.bind(this);
         this.notifyListeners = this.notifyListeners.bind(this);
+        this.onViewMounted = this.onViewMounted.bind(this);
+        this.onViewWillUnmount = this.onViewWillUnmount.bind(this);
     }
 
     /**
@@ -65,6 +67,16 @@ export class BaseViewModel {
         for (var iii = 0; iii < this._listeners.length; iii++)
             this._listeners[iii](thiz);
     }
+
+    /**
+     * Called when the view has just been mounted.
+     */
+    onViewMounted() { }
+
+    /**
+     * Called when the view is about to be removed removed from the DOM
+     */
+    onViewWillUnmount() { }
 }
 
 
@@ -86,10 +98,12 @@ export class ViewModelConsumer extends React.Component {
     }
 
     componentDidMount() {
+        this.state.onViewMounted();
         this.onModelReady();
     }
 
     componentWillUnmount() {
+        this.state.onViewWillUnmount();
         this.state.clearSubscriptions();
     }
 

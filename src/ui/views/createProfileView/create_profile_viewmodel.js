@@ -1,4 +1,4 @@
-import { BaseViewModel } from '../../../mvvm';
+import AuthenticatedViewModel from '../authenticated_viewmodel';
 import { School, Company, HardSkill, SoftSkill } from '../../common/models'
 import { displayImage } from '../../common/utils'
 
@@ -8,7 +8,7 @@ import { developersApi } from '../../../apis/developersApi'
 /**
  * ViewModel for the create profile view.
  */
-export class CreateProfileViewModel extends BaseViewModel {
+export class CreateProfileViewModel extends AuthenticatedViewModel {
 
     constructor() {
         super();

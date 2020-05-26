@@ -4,13 +4,25 @@ export class AuthenticationService {
 
     constructor() {
         this.__currentUser = null;
+
+        this.getCurrentUser = this.getCurrentUser.bind(this);
+        this.isUserSignedIn = this.isUserSignedIn.bind(this);
+        this.signInWithEmailAndPassword = this.signInWithEmailAndPassword.bind(this);
     }
 
     /**
      * Returns the currently signed in user, null if there is non
      */
     async getCurrentUser() {
+        alert(JSON.stringify(this.__currentUser));
         return this.__currentUser;
+    }
+
+    /**
+     * Returns true if the current user signed in.
+     */
+    async isUserSignedIn() {
+        return this.__currentUser !== null;
     }
 
     /**
@@ -22,9 +34,16 @@ export class AuthenticationService {
      * @param {String} password
      */
     async signInWithEmailAndPassword(email, password) {
-        var user = await authenticationApi.signInWithEmailAndPassword(email, password);
-        this.__currentUser = user;
+        this.__currentUser = await authenticationApi.signInWithEmailAndPassword(email, password);
+    }
+
+    static __authenticationService = null;
+    static getInstance() {
+        if (AuthenticationService.__authenticationService === null)
+            return AuthenticationService.__authenticationService = new AuthenticationService();
     }
 }
 
-export const authenticationService = new AuthenticationService();;
+
+const authenticationService = AuthenticationService.getInstance();
+export { authenticationService };

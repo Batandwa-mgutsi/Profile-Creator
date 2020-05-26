@@ -40,14 +40,14 @@ export default class LoginViewModel extends BaseViewModel {
      * 
      * TODO(Batandwa)
      */
-    async login() {
+    async login(history) {
         console.log('Now logging in');
         this.setBusy(true);
         this.notifyListeners(this);
 
         try {
             await authenticationService.signInWithEmailAndPassword(this.email, this.password);
-            window.location = '/profiles';
+            history.push('/profiles');
         } catch (e) {
             console.log(e);
             console.trace();

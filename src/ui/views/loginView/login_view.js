@@ -62,7 +62,7 @@ export default class LoginView extends ViewModelConsumer {
                                         }
                                         <br /><br />
                                         <center>
-                                            {(!model.isBusy() && model.canLogin()) && <a className="waves-effect waves-light btn" onClick={(e) => model.login()}>Log In</a>}
+                                            {(!model.isBusy() && model.canLogin()) && <a className="waves-effect waves-light btn" onClick={(e) => model.login(props.history)}>Log In</a>}
                                         </center>
                                     </form>
                                 </div>

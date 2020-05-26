@@ -16,7 +16,7 @@ export default class ProfilesView extends ViewModelConsumer {
                 <div className='nav-wrapper indigo darken-4'>
                     <a href='#!' class='brand-logo left' style={{ marginLeft: 20 }}>Profile Creator</a>
                     <ul className='right hide-on-med-and-down'>
-                        <li><a href='/createProfile'>Create Profile</a></li>
+                        <li><a href='#!' onClick={(e) => props.history.push('/createProfile')}>Create Profile</a></li>
                         {/* TODO - Logout the user */}
                         <li><a href="/">Log Out</a></li>
                     </ul>

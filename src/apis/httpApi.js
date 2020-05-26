@@ -91,7 +91,15 @@ async function _checkForError(response, keyToReturn) {
     if (response.status !== 200) {
         throw Error('An Error occurred: ' + response.status + ' - ' + text);
     } else {
-        var json = JSON.parse(text)
-        return json[keyToReturn];
+        var entries = Object.entries(JSON.parse(text));
+        let value = null;
+        for (var entry in entries) {
+            if (entries[entry][0] === keyToReturn) {
+                value = entries[entry][1];
+                break;
+            }
+        }
+
+        return value;
     }
 }
