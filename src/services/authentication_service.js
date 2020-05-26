@@ -1,4 +1,4 @@
-import { authenticationApi } from '../apis/authenticationApi';
+import { authenticationApi } from '../apis/authentication_api';
 
 export class AuthenticationService {
 

@@ -1,5 +1,5 @@
 import { BaseViewModel } from '../../../mvvm';
-import { authenticationService } from '../../../services/authenticationService'
+import { authenticationService } from '../../../services/authentication_service'
 
 /**
  * ViewModel for the LoginVew

@@ -1,4 +1,4 @@
-import { post } from './httpApi'
+import { post } from './http_api'
 
 /**
  * Api to authenticate the user with remote server.

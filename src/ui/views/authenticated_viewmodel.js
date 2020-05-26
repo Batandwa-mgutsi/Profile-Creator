@@ -1,5 +1,5 @@
 import { BaseViewModel } from '../../mvvm';
-import { authenticationService } from '../../services/authenticationService';
+import { authenticationService } from '../../services/authentication_service';
 
 export default class AuthenticatedViewModel extends BaseViewModel {
     constructor() {

@@ -2,8 +2,8 @@ import AuthenticatedViewModel from '../authenticated_viewmodel';
 import { School, Company, HardSkill, SoftSkill } from '../../common/models'
 import { displayImage } from '../../common/utils'
 
-import { authenticationService } from '../../../services/authenticationService'
-import { developersApi } from '../../../apis/developersApi'
+import { authenticationService } from '../../../services/authentication_service'
+import { developersApi } from '../../../apis/developers_api'
 
 /**
  * ViewModel for the create profile view.

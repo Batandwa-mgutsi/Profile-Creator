@@ -1,6 +1,6 @@
-import { developersApi } from '../../../apis/developersApi';
-import { authenticationApi } from '../../../apis/authenticationApi';
-import AuthenticatedViewModel from '../../views/authenticated_viewmodel';
+import { developersApi } from '../../../apis/developers_api';
+import { authenticationApi } from '../../../apis/authentication_api';
+import AuthenticatedViewModel from '../authenticated_viewmodel';
 
 /**
  * ViewModel for the profiles view

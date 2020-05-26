@@ -1,4 +1,4 @@
-import { post, get, put } from './httpApi'
+import { post, get, put } from './http_api'
 
 export class DevelopersApi {
     /**
