@@ -5,7 +5,7 @@ import { SoftSkill } from '../common/models';
 
 import { getSoftSkillIconById } from '../common/skills';
 
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatings from 'react-star-ratings';
 
 
 export default class SoftSkillDisplay extends ViewModelConsumer {
@@ -30,12 +30,14 @@ export default class SoftSkillDisplay extends ViewModelConsumer {
             <div className='col s8'>
                 <div className='col s12'>
                     <div style={{ fontSize: '26px' }}>
-                        <StarRatingComponent
+                        <StarRatings
                             name={props.softSkill.id}
-                            value={props.softSkill.rating}
-                            starCount={5}
-                            editing={props.isEditable}
-                            onStarClick={(nextValue, prevValue, name) => props.onRatingChanged(nextValue)}
+                            rating={props.softSkill.rating}
+                            starRatedColor='orange'
+                            starHoverColor='orange'
+                            numberOfStars={5}
+                            starDimension='30px'
+                            changeRating={props.isEditable && ((nextValue, name) => props.onRatingChanged(nextValue))}
                         />
                     </div>
 
@@ -51,15 +53,14 @@ export default class SoftSkillDisplay extends ViewModelConsumer {
                         >
                             {model.description}
                         </textarea>
-                        : <div className='col'
+                        : <div
+                            dangerouslySetInnerHTML={{ __html: model.description.replace(/\n/g, '<br />') }}
+                            className='col'
                             style={{
-                                fontWeight: 'medium',
-                                fontSize: '25px',
-                                color: '#333232FA'
+                                fontWeight: 'bold',
+                                fontSize: '1.3vw',
                             }}
-                            onClick={(e) => model.setIsEditingDescription(true)}
-                        >
-                            {model.description}
+                            onClick={(e) => model.setIsEditingDescription(true)}>
                         </div>
                     }
                 </div>

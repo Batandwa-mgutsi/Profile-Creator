@@ -1,7 +1,7 @@
 import React from 'react';
 import { HardSkill } from '../common/models';
 
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatings from 'react-star-ratings';
 
 import { getHardSkillIconById } from '../common/skills';
 
@@ -19,15 +19,18 @@ export default function HardSkillDisplay(props) {
     }}>
         <div className='col s12' style={{ margin: 'auto' }}>
             <div className='col s12'>
-                <img className='responsive-img' src={getHardSkillIconById(props.hardSkill.id)} style={{ maxWidth: '94.5px', maxHeight: '78px' }} />
+                <img className='responsive-img' src={getHardSkillIconById(props.hardSkill.id)} />
             </div>
-            <div className='col s12' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                <StarRatingComponent
+            <div className='col s12' style={{ textAlign: 'center' }}>
+                <StarRatings
                     name={props.hardSkill.id}
-                    value={props.hardSkill.rating}
-                    starCount={5}
-                    editing={props.isEditable}
-                    onStarClick={(nextValue, prevValue, name) => props.onRatingChanged(nextValue)}
+                    rating={props.hardSkill.rating}
+                    starRatedColor='orange'
+                    starHoverColor='orange'
+                    numberOfStars={5}
+                    starDimension='1vw'
+                    starSpacing='0px'
+                    changeRating={props.isEditable && ((nextValue, prevValue, name) => props.onRatingChanged(nextValue))}
                 />
             </div>
             <div className='col s12' style={{ textAlign: 'center', background: '#051F74 0% 0% no-repeat padding-box', color: '#FFFFFFFA' }}>

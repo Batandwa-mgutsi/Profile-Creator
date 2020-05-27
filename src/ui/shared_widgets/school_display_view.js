@@ -22,26 +22,26 @@ export default class SchoolDisplayView extends React.Component {
     render() {
         return <div className='row' >
             <div className='col s4'>
-                <img id={this.getLogoElemId()} src={this.props.school?.schoolLogo == null ? NoSchoolLogo : (!this.props.schoolLogoIsFile && this.props.school?.schoolLogo)} style={{ maxHeight: '190px', maxWidth: '190px' }} />
+                <img id={this.getLogoElemId()} className='responsive-img' src={this.props.school?.schoolLogo == null ? NoSchoolLogo : (!this.props.schoolLogoIsFile && this.props.school?.schoolLogo)} />
             </div>
             <div className='col s8'>
-                <div className='col s12' style={{ fontWeight: 'medium', fontSize: '40px', color: '#051F74FA' }}>
+                <div className='col s12' style={{ fontWeight: 'medium', fontSize: '1.4vw', color: '#051F74FA' }}>
                     {this.props.school?.schoolName.concat(', ', this.props.school?.schoolLocation)}
                 </div>
-                <div className='col s12' horizontal layout>
+                <div className='col s12'>
                     <div className='col s1' style={{ marginRight: '30px' }}>
-                        <img src={GraduationIcon} alt='' height='42px' width='42px' />
+                        <img src={GraduationIcon} alt='' height='40vw' width='40vw' />
                     </div>
-                    <div className='col' style={{ fontWeight: 'medium', fontSize: '33px', color: '#051F74FA' }}>
+                    <div className='col' style={{ fontWeight: 'medium', fontSize: '1vw', color: '#051F74FA' }}>
                         {this.props.school?.fieldsOfStudy}
                     </div>
                 </div>
 
-                <div className='col s12' horizontal layout>
+                <div className='col s12'>
                     <div className='col s1' style={{ marginRight: '30px' }}>
-                        <img src={AchievementsIcom} alt='' height='42px' width='42px' />
+                        <img src={AchievementsIcom} alt='' height='40vw' width='40vw' />
                     </div>
-                    <div className='col' style={{ fontWeight: 'medium', fontSize: '33px', color: '#051F74FA' }}>
+                    <div className='col' style={{ fontWeight: 'medium', fontSize: '1vw', color: '#051F74FA' }}>
                         {this.props.school?.achievements}
                     </div>
                 </div>

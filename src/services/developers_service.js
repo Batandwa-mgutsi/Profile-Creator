@@ -101,6 +101,19 @@ const fakeDevelopers = [
                 "title": "Data Operations and QC Intern",
                 "duration": "December 2018 - Present",
                 "jobDescription": "Build and align aerial imagery taken with drones andtroubleshoot where automated processing failed. Also Trackimage processing jobs using the web based platform and SQL.End-to-End Tests: Created highly performant and extremely stable end-to-end test suite using Cypres"
+            }, {
+                "companyName": "Aerobotics",
+                "companyLogo": 'https://lafeber.com/pet-birds/wp-content/uploads/2020/03/macaw-face-px-ara-3695678-300x300.jpg',
+                "title": "Data Operations and QC Intern",
+                "duration": "December 2018 - Present",
+                "jobDescription": "Build and align aerial imagery taken with drones andtroubleshoot where automated processing failed. Also Trackimage processing jobs using the web based platform and SQL.End-to-End Tests: Created highly performant and extremely stable end-to-end test suite using Cypres"
+            },
+            {
+                "companyName": "Aerobotics",
+                "companyLogo": 'https://lafeber.com/pet-birds/wp-content/uploads/2020/03/macaw-face-px-ara-3695678-300x300.jpg',
+                "title": "Data Operations and QC Intern",
+                "duration": "December 2018 - Present",
+                "jobDescription": "Build and align aerial imagery taken with drones andtroubleshoot where automated processing failed. Also Trackimage processing jobs using the web based platform and SQL.End-to-End Tests: Created highly performant and extremely stable end-to-end test suite using Cypres"
             },
         ],
         "technicalSkills": [

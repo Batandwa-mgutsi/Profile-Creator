@@ -1,4 +1,4 @@
-import { SelectableSkill, SoftSkill } from './models'
+import { SelectableSkill, SoftSkill, HardSkill } from './models'
 import Running from '../../image_assets/skill_icons/running.png'
 import SelfMotivation from '../../image_assets/skill_icons/self_motivation.png'
 import Java from '../../image_assets/skill_icons/java.png'
@@ -32,6 +32,22 @@ export function getSelectableSoftSkills() {
 }
 
 /**
+ * 
+ * @param {*} technicalSkillId 
+ */
+export function getTechnicalSkillIconById(technicalSkillId) {
+    return Java;
+}
+
+/**
+ * 
+ * @param {*} hobbyId 
+ */
+export function getHobbyIconById(hobbyId) {
+    return Running;
+}
+
+/**
  * @param {String} softSkillId 
  */
 export function getSoftSkillIconById(softSkillId) {
@@ -44,4 +60,63 @@ export function getSoftSkillIconById(softSkillId) {
  */
 export function getHardSkillIconById(hardSkillId) {
     return Java;
+}
+
+/**
+ * From the given list of hard skills returns all those that are languages
+ * 
+ * @param {Array<HardSkill>} hardSkills
+ * @returns {Array<HardSkill>}
+ */
+export function getLanguages(hardSkills) {
+    // TODO
+    return hardSkills;
+}
+
+
+/**
+ * From the given list of hard skills returns all those that are frontend technologies
+ * 
+ * @param {Array<HardSkill>} hardSkills
+ * @returns {Array<HardSkill>}
+ */
+export function getFrontends(hardSkills) {
+    // TODO
+    return hardSkills;
+}
+
+
+/**
+ * From the given list of hard skills returns all those that are backend technologies
+ * 
+ * @param {Array<HardSkill>} hardSkills
+ * @returns {Array<HardSkill>}
+ */
+export function getBackends(hardSkills) {
+    // TODO
+    return hardSkills;
+}
+
+
+/**
+ * From the given list of hard skills returns all those that are database technologies
+ * 
+ * @param {Array<HardSkill>} hardSkills
+ * @returns {Array<HardSkill>}
+ */
+export function getDatabases(hardSkills) {
+    // TODO
+    return hardSkills;
+}
+
+
+/**
+ * From the given list of hard skills returns all those that are mobile and tools
+ * 
+ * @param {Array<HardSkill>} hardSkills
+ * @returns {Array<HardSkill>}
+ */
+export function getMobileTools(hardSkills) {
+    // TODO
+    return hardSkills;
 }
