@@ -316,7 +316,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
     /**
      * Save the developer profile
      */
-    async saveProfile() {
+    async saveProfile(history) {
         this.setBusy(true);
         this.notifyListeners(this);
 
@@ -333,7 +333,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
 
         // Profile Picture
         if (this.developer.profilePicture != null) {
-            this.developer.profilePicture = toBase64(this.developer.profilePicture);
+            this.developer.profilePicture = this.getImageObjectFromBase64(await toBase64(this.developer.profilePicture));
         } else {
             delete this.developer.profilePicture;
         }
@@ -342,7 +342,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         for (var schoolIndex in this.developer.education) {
             var school = this.developer.education[schoolIndex];
             if (school.schoolLogo != null) {
-                this.developer.education[schoolIndex].schoolLogo = toBase64(school.schoolLogo);
+                this.developer.education[schoolIndex].schoolLogo = this.getImageObjectFromBase64(await toBase64(school.schoolLogo));
             } else {
                 delete this.developer.education[schoolIndex].schoolLogo;
             }
@@ -352,7 +352,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         for (var companyIndex in this.developer.experience) {
             var company = this.developer.experience[companyIndex];
             if (company.companyLogo != null) {
-                this.developer.experience[companyIndex].companyLogo = toBase64(company.companyLogo);
+                this.developer.experience[companyIndex].companyLogo = this.getImageObjectFromBase64(await toBase64(company.companyLogo));
             } else {
                 delete this.developer.experience[companyIndex].companyLogo;
             }
@@ -362,11 +362,11 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         this.developer.socialMedia = [
             {
                 name: 'youtube',
-                link: this.youtubeLink
+                link: this.youtubeLink.length == 0 ? '_' : this.youtubeLink
             },
             {
                 name: 'github',
-                link: this.githubLink,
+                link: this.githubLink.length == 0 ? '_' : this.githubLink
             }
         ];
 
@@ -374,8 +374,9 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         // Save the developer
 
         try {
+            console.log(this.developer);
             await developersService.createProfile(this.developer);
-            window.location = 'profiles'
+            history.push('/profiles');
         } catch (e) {
             console.log(e);
             console.trace();
@@ -384,6 +385,18 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
 
         this.setBusy(false)
         this.notifyListeners(this);
+    }
+
+    /**
+     * @param {String} base64
+     */
+    getImageObjectFromBase64(base64) {
+        var type = base64.substring(base64.indexOf('/') + 1, base64.indexOf(';base64'));
+        console.log(type);
+        return {
+            type: type,
+            data: base64,
+        };
     }
 }
 

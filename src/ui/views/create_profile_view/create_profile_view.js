@@ -252,7 +252,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                     <div className='row' >
                         <div style={{ float: 'right', paddingTop: '20px' }}>
                             {!model.isBusy() ?
-                                <div className='btn' onClick={(e) => model.saveProfile()}>Save</div>
+                                <div className='btn' onClick={(e) => model.saveProfile(props.history)}>Save</div>
                                 : <div className='btn' disabled>Save</div>
                             }
                         </div>
