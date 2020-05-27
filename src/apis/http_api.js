@@ -8,10 +8,19 @@
  * @param {String} keyToReturn
  */
 export async function get(url, keyToReturn, headers = {}) {
+    headers['Content-Type'] = 'application/json';
+    headers['Accept'] = 'application/json';
+    headers['Cookie'] = document.cookie;
+
     const response = await fetch(url, {
+        credentials: 'include',
+        withCredentials: true,
         headers: headers,
     });
 
+    console.log('Response: ', response);
+    console.log(response.headers.get('set-cookie')); // undefined
+    console.log(document.cookie); // nope
     return await _checkForError(response, keyToReturn);
 }
 
@@ -66,14 +75,17 @@ export async function put(url, data, keyToReturn, headers = {}) {
  * @param {String} keyToReturn
  */
 async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
+    headers['Content-Type'] = 'application/json';
+    headers['Accept'] = 'application/json';
+    headers['Cookie'] = document.cookie;
+
+
     console.log(data);
     const response = await fetch(url, {
         credentials: 'include',
         method: method,
         withCredentials: true,
-        headers: { "Content-Type": "application/json",
-                    Accept: 'application/json',
-                'Cookie': document.cookie },
+        headers: headers,
         body: JSON.stringify(data)
     });
     console.log('Response: ', response);
@@ -89,8 +101,8 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
 async function _checkForError(response, keyToReturn) {
     var text = await response.text();
     console.log('Error checking response:', text);
-    for(const header of response.headers){
-       console.log(header);
+    for (const header of response.headers) {
+        console.log(header);
     }
     console.log('Error res:', JSON.parse(text));
     if (response.status !== 200) {

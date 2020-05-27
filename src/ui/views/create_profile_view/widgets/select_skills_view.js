@@ -29,7 +29,7 @@ export default class SelectSkillsView extends ViewModelConsumer {
                 <div className='col s12' style={{ marginRight: '10px', marginLeft: '10px' }}>
                     {
                         (model.getFilteredUnselectedSkills().slice().concat(model.selectedSkills)).map((skill) => {
-                            return <div className='col' style={{ marginRight: '10px' }} onClick={(e) => {
+                            return <div key={skill.name} className='col' style={{ marginRight: '10px' }} onClick={(e) => {
                                 model.isSelected(skill) ?
                                     model.unselectSkill(skill) : model.selectSkill(skill)
                             }}>
