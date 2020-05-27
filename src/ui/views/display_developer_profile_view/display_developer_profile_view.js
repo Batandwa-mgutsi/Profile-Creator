@@ -70,7 +70,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                     <div className='col s12' style={{ paddingTop: '7px' }}>
                                         <div className='col s6'>
                                             <div className='col s2'>
-                                                <img src={YouTubeIcon} style={{ maxHeight: '30px', maxWidth: '30px' }} />
+                                                <img src={YouTubeIcon} style={{ maxHeight: '30px', maxWidth: '30px' }} alt='youtube' />
                                             </div>
                                             <a href={this.getSocialMediaLink('youtube', model.developer)} className='col s10'>
                                                 {this.getSocialMediaLink('youtube', model.developer)}
@@ -78,7 +78,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                         </div>
                                         <div className='col s6'>
                                             <div className='col s2'>
-                                                <img src={GithubIcon} style={{ maxHeight: '30px', maxWidth: '30px' }} />
+                                                <img src={GithubIcon} style={{ maxHeight: '30px', maxWidth: '30px' }} alt='github' />
                                             </div>
                                             <a href={this.getSocialMediaLink('github', model.developer)} className='col s10'>
 
@@ -187,7 +187,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                             </div>
 
                             <div className='row white'>
-                                {getLanguages(model.developer.hardSkills).length != 0 &&
+                                {getLanguages(model.developer.hardSkills).length !== 0 &&
                                     <div className='col s12'>
                                         <Section title='LANGUAGES'>
                                             <div className='col s12'>
@@ -202,7 +202,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                         </Section>
                                     </div>
                                 }
-                                {getFrontends(model.developer.hardSkills).length != 0 &&
+                                {getFrontends(model.developer.hardSkills).length !== 0 &&
                                     <div className='col s12'>
                                         <Section title='FRONTEND'>
                                             <div className='col s12'>
@@ -217,7 +217,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                         </Section>
                                     </div>
                                 }
-                                {getBackends(model.developer.hardSkills).length != 0 &&
+                                {getBackends(model.developer.hardSkills).length !== 0 &&
                                     <div className='col s12'>
                                         <Section title='BACKEND'>
                                             <div className='col s12'>
@@ -232,7 +232,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                         </Section>
                                     </div>
                                 }
-                                {getDatabases(model.developer.hardSkills).length != 0 &&
+                                {getDatabases(model.developer.hardSkills).length !== 0 &&
                                     <div className='col s12'>
                                         <Section title='DATABASE'>
                                             <div className='col s12'>
@@ -247,7 +247,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                         </Section>
                                     </div>
                                 }
-                                {getMobileTools(model.developer.hardSkills).length != 0 &&
+                                {getMobileTools(model.developer.hardSkills).length !== 0 &&
                                     <div className='col s12'>
                                         <Section title='MOBILE/TOOLS'>
                                             <div className='col s12'>

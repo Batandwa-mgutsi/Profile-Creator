@@ -1,6 +1,9 @@
 import { CreateProfileViewModel, DialogToShow } from './create_profile_viewmodel';
 import { School, Company, SelectableSkill, HardSkill, SoftSkill, SocialMedia } from '../../common/models';
-import { getSelectableTechnicalSkills, getSelectableHardSkills, getSelectableHobies, getSelectableSoftSkills } from '../../common/skills';
+import {
+    getSelectableTechnicalSkills, getSelectableHardSkills, getSelectableHobies,
+    getSelectableSoftSkills, getTechnicalSkillIconById, getHobbyIconById
+} from '../../common/skills';
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
 import '../../../materialize/css/materialize.css';
@@ -132,10 +135,10 @@ export default class CreateProfileView extends ViewModelConsumer {
                         <div className='col s12 section' style={{ border: '1px solid #707070', paddingBottom: '20px' }}>
                             <h4 style={this.getSectionHeaderStyle()} >Technical Skills</h4>
                             {
-                                model.developer.technicalSkills.map((skillName) => {
-                                    var skill = getSelectableTechnicalSkills().find((item => item.name == skillName));
-                                    return <div className='col'>
-                                        {IconifiedSkillDisplay(skill.iconSrc)}
+                                model.developer.technicalSkills.map((skillId) => {
+                                    var icon = getTechnicalSkillIconById(skillId);
+                                    return <div className='col s2'>
+                                        {IconifiedSkillDisplay(icon)}
                                     </div>
                                 })
                             }
@@ -152,10 +155,10 @@ export default class CreateProfileView extends ViewModelConsumer {
                             <h4 style={this.getSectionHeaderStyle()} >Hobies/Extra - Curricular Activities</h4>
 
                             {
-                                model.developer.hobies.map((hobbyName) => {
-                                    var hobby = getSelectableHobies().find((item => item.name == hobbyName));
+                                model.developer.hobies.map((hobbyId) => {
+                                    var icon = getHobbyIconById(hobbyId);
                                     return <div className='col'>
-                                        {IconifiedSkillDisplay(hobby.iconSrc, hobby.name)}
+                                        {IconifiedSkillDisplay(icon, hobbyId)}
                                     </div>
                                 })
                             }
