@@ -182,6 +182,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                                                 isEditable={true}
                                                 key={hardSkill.id}
                                                 hardSkill={hardSkill}
+                                                onYearsChanged={(newYears) => model.setHardSkillExperience(hardSkill, newYears)}
                                                 onRatingChanged={(newRating) => model.rateHardSkill(hardSkill, newRating)}
                                             />
                                         </div>
