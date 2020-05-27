@@ -23,7 +23,7 @@ class ProfilesView extends ViewModelConsumer {
         return <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: '#FBFBFB' }}>
             <nav style={{ top: 0, display: 'fix' }}>
                 <div className='nav-wrapper indigo darken-4'>
-                    <a href='#!' class='brand-logo left' style={{ marginLeft: 20 }}>Profile Creator</a>
+                    <a href='#!' className='brand-logo left' style={{ marginLeft: 20 }}>Profile Creator</a>
                     <ul className='right hide-on-med-and-down'>
                         <li><a href='#!' onClick={(e) => props.history.push('/content')}>Content</a></li>
                         <li><a href="/">Log Out</a></li>
@@ -67,9 +67,9 @@ class ProfilesView extends ViewModelConsumer {
                     </div>
             }
             {!model.isBusy() &&
-                <div class="fixed-action-btn">
-                    <a class="btn-floating btn-large teal" onClick={(e) => props.history.push('/createProfile')}>
-                        <i class="large material-icons">add</i>
+                <div className="fixed-action-btn">
+                    <a className="btn-floating btn-large teal" onClick={(e) => props.history.push('/createProfile')}>
+                        <i className="large material-icons">add</i>
                     </a>
                 </div>
             }
