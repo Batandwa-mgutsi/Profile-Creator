@@ -8,7 +8,7 @@ import { getDeveloperFullName } from '../../common/utils';
 
 import HalfDeveloperDisplay from '../../shared_widgets/half_developer_display';
 
-export default class ProfilesView extends ViewModelConsumer {
+class ProfilesView extends ViewModelConsumer {
     constructor(props) {
         super(props, new ProfilesViewModel());
         const { cookies } = this.props;
