@@ -35,6 +35,15 @@ export class AuthenticationService {
     async signInWithEmailAndPassword(email, password) {
         this.__currentUser = await authenticationApi.signInWithEmailAndPassword(email, password);
     }
+    /**
+     * Signs out the given user.
+     * 
+     * Throws error object on error.
+     * 
+     */
+    async signOut() {
+        // pass
+    }
 
     static __authenticationService = null;
     static getInstance() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
 import ProfilesViewModel from './profiles_viewmodel';
+import { authenticationService } from '../../../services/authentication_service'
+import { withCookies, Cookies, useCookies } from 'react-cookie';
 
 import { getDeveloperFullName } from '../../common/utils';
 
@@ -9,6 +11,9 @@ import HalfDeveloperDisplay from '../../shared_widgets/half_developer_display';
 export default class ProfilesView extends ViewModelConsumer {
     constructor(props) {
         super(props, new ProfilesViewModel());
+        const { cookies } = this.props;
+        console.log('Profile cookies: ', cookies);
+        console.log('Profile Props Cookies : ', cookies.get('connect.sid'));
     }
 
     /**
@@ -73,3 +78,5 @@ export default class ProfilesView extends ViewModelConsumer {
         </div>
     }
 }
+
+export default withCookies(ProfilesView);

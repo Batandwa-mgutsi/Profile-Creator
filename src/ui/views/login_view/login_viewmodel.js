@@ -47,6 +47,7 @@ export default class LoginViewModel extends BaseViewModel {
 
         try {
             await authenticationService.signInWithEmailAndPassword(this.email, this.password);
+            console.log('Getting profiles logging in');
             history.push('/profiles');
         } catch (e) {
             console.log(e);
