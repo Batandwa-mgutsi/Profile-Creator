@@ -1,10 +1,16 @@
 import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
 import ProfilesViewModel from './profiles_viewmodel';
+import { authenticationService } from '../../../services/authentication_service'
+import { withCookies, Cookies, useCookies  } from 'react-cookie';
 
-export default class ProfilesView extends ViewModelConsumer {
+class ProfilesView extends ViewModelConsumer {
+
     constructor(props) {
         super(props, new ProfilesViewModel());
+        const {cookies} = this.props;
+        console.log('Profile cookies: ',cookies);
+        console.log('Profile Props Cookies : ',cookies.get('connect.sid'));
     }
 
     /**
@@ -18,7 +24,7 @@ export default class ProfilesView extends ViewModelConsumer {
                     <ul className='right hide-on-med-and-down'>
                         <li><a href='#!' onClick={(e) => props.history.push('/createProfile')}>Create Profile</a></li>
                         {/* TODO - Logout the user */}
-                        <li><a href="/">Log Out</a></li>
+                        <li><a href="/" onClick={authenticationService.signOut}>Log Out</a></li>
                     </ul>
                 </div>
             </nav>
@@ -29,3 +35,5 @@ export default class ProfilesView extends ViewModelConsumer {
         </div>
     }
 }
+
+export default withCookies(ProfilesView);

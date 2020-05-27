@@ -21,6 +21,18 @@ export class AuthenticationApi {
         };
         return await post(endpoint, data, 'user');
     }
+    /**
+     * Signs out a user.
+     * 
+     * Returns the signed in user on success, throws error object on error
+     * 
+     */
+    async signOut() {
+        var endpoint = 'http://localhost:4000/logout';
+        var data = {
+        };
+        return await post(endpoint, data, 'user');
+    }
 }
 
 
