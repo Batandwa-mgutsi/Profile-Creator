@@ -16,7 +16,10 @@ export class DevelopersService {
      * Returns the profile of the developer with the given id
      */
     async getProfile(id) {
-        return await developersApi.getProfile(id, await authenticationService.getCurrentUser());
+        return fakeDevelopers.find((obj) => obj._id === id);
+
+        // TODO(FIX)
+        // return await developersApi.getProfile(id, await authenticationService.getCurrentUser());
     }
 
     /**
@@ -37,11 +40,14 @@ export class DevelopersService {
         })
 
         return promise;
+        // TODO(FIX)
         // return await developersApi.listDevelopers(await authenticationService.getCurrentUser());
     }
 
     /**
-     * Returns the public profile of the developer with the given name and id
+     * Returns the public profile of the developer with the given name and id.
+     * 
+     * TODO(Remove this and make getProfile a public route that fails if the the developers service is not public)
      */
     async getPublicProfile(name, id) {
         return await developersApi.getPublicProfile(name, id);

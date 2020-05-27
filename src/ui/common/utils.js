@@ -45,3 +45,11 @@ export function getCurrentOccupation(developer) {
 
     return null;
 }
+
+/**
+ * Returns the firstname lastName string of the given developer.
+ * @return {String}
+ */
+export function getDeveloperFullName(developer) {
+    return developer.firstName + ' ' + developer.lastName;
+}

@@ -2,7 +2,9 @@ import React from 'react';
 import { ViewModelConsumer } from '../../../mvvm';
 import ProfilesViewModel from './profiles_viewmodel';
 
-import { getCurrentOccupation } from '../../common/utils';
+import { getDeveloperFullName } from '../../common/utils';
+
+import HalfDeveloperDisplay from '../../shared_widgets/half_developer_display';
 
 export default class ProfilesView extends ViewModelConsumer {
     constructor(props) {
@@ -36,22 +38,7 @@ export default class ProfilesView extends ViewModelConsumer {
                             {
                                 model.getFilteredDevelopers().map((developer) => {
                                     return <div key={developer._id} className='row short-profile' style={{ boxShadow: '0px 3px 6px #00000029', borderRadius: '6px', marginTop: '30px', padding: '10px' }}>
-                                        <div className='col s4'>
-                                            <img src={developer.profilePicture} style={{ maxHeight: '190px', maxWidth: '190px', borderRadius: '50%' }} />
-                                        </div>
-                                        <div className='col s8'>
-                                            <div className='col s12' style={{ fontWeight: 'bold', fontSize: '20px', color: '#051F74FA' }}>
-                                                {this.getDeveloperCurrentCompanyName(developer) + ' Developer'}
-                                            </div>
-                                            <div className='col s12' style={{ fontWeight: 'bold', fontSize: '40px', color: '#051F74FA' }}>
-                                                {developer.firstName + ' ' + developer.lastName}
-                                            </div>
-                                            <div className='col s12'>
-                                                <div className='col' style={{ fontWeight: 'medium', fontSize: '20px', color: '#051F74FA' }}>
-                                                    {developer.shortBiography}
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <HalfDeveloperDisplay developer={developer} />
                                         <div className='col s12'>
                                             <div className='col' style={{ float: 'right', paddingTop: '10px' }}>
                                                 <a href='#!' className='btn-flat waves-effect waves-light'
@@ -61,10 +48,13 @@ export default class ProfilesView extends ViewModelConsumer {
                                                         border: '1px solid #D9D9D9',
                                                         borderRadius: '5px'
                                                     }} >Edit</a>
-                                                <a href='#!' className='btn waves-effect waves-light' >View</a>
+                                                <a href='#!'
+                                                    className='btn waves-effect waves-light'
+                                                    onClick={(e) => props.history.push(`/profile/${getDeveloperFullName(developer)}/${developer._id}/`)} >
+                                                    View
+                                                </a>
                                             </div>
                                         </div>
-
                                     </div>
                                 })
                             }
@@ -81,13 +71,5 @@ export default class ProfilesView extends ViewModelConsumer {
 
 
         </div>
-    }
-
-    getDeveloperCurrentCompanyName(developer) {
-        var company = getCurrentOccupation(developer);
-        if (company === null)
-            return '';
-
-        return company.companyName;
     }
 }

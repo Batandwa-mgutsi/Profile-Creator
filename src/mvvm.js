@@ -99,7 +99,7 @@ export class ViewModelConsumer extends React.Component {
 
     componentDidMount() {
         this.state.onViewMounted();
-        this.onModelReady();
+        this.onModelReady(this.state);
     }
 
     componentWillUnmount() {

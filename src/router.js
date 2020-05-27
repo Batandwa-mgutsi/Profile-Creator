@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginView from './ui/views/login_view/login_view';
 import CreateProfileView from './ui/views/create_profile_view/create_profile_view';
 import ProfilesView from './ui/views/profiles_view/profiles_view';
+import DisplayDeveloperProfileView from './ui/views/display_developer_profile_view/display_developer_profile_view';
 
 import React from 'react';
 import App from './App';
@@ -11,6 +12,7 @@ const routes = <Router>
         <Route exact path='/' component={LoginView} />
         <Route path='/createProfile' component={CreateProfileView} />
         <Route path='/profiles' component={ProfilesView} />
+        <Route path='/profile/:name/:id' component={DisplayDeveloperProfileView} />
     </Route>
 </Router>
 
