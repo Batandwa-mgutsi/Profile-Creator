@@ -1,13 +1,13 @@
 # Profile Creator
 
-- [ ] Admin login screen (once logged in, it should be redirected to
+- [x] Admin login screen (once logged in, it should be redirected to
 /profiles route 10
-- [ ] /createProfile route to take inputs required to populate the profile 35
-- [ ] /profile/:name/:id route to display profile that is a public link that can be shared 20
-- [ ] Accuracy of matching created profile with provided PDF 100
+- [x] /createProfile route to take inputs required to populate the profile 35
+- [x] /profile/:name/:id route to display profile that is a public link that can be shared 20
+- [x] Accuracy of matching created profile with provided PDF 100
 - [ ] /editProfile/:name/:id route to edit profile and save changes that will be reflected on /generatedProfile/:name/:id 30
-- [ ] /profiles route to view all profiles created with a dynamic search to search by name of profile (there should be 2 buttons, View or Edit that will redirect to relevant routes) 40
-- [ ] Header with Logout button, Profiles button, and Create Profile button 10
+- [x] /profiles route to view all profiles created with a dynamic search to search by name of profile (there should be 2 buttons, View or Edit that will redirect to relevant routes) 40
+- [x] Header with Logout button, Profiles button, and Create Profile button 10
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
