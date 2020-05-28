@@ -4,6 +4,8 @@ import { displayImage } from '../../common/utils';
 
 import { developersService } from '../../../services/developers_service';
 
+import { base64Images } from '../../../image_assets/base64_images';
+
 /**
  * ViewModel for the create profile view.
  */
@@ -320,9 +322,6 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         this.setBusy(true);
         this.notifyListeners(this);
 
-        // If files have been selected, encode them in base 64
-        // else remove the properties
-
         // See: https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
         const toBase64 = file => new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -335,27 +334,29 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
         if (this.developer.profilePicture != null) {
             this.developer.profilePicture = this.getImageObjectFromBase64(await toBase64(this.developer.profilePicture));
         } else {
-            delete this.developer.profilePicture;
+            this.developer.profilePicture = this.getImageObjectFromBase64(base64Images.noProfilePicture);
         }
 
         // School Logos
         for (var schoolIndex in this.developer.education) {
             var school = this.developer.education[schoolIndex];
-            if (school.schoolLogo != null) {
-                this.developer.education[schoolIndex].schoolLogo = this.getImageObjectFromBase64(await toBase64(school.schoolLogo));
-            } else {
-                delete this.developer.education[schoolIndex].schoolLogo;
-            }
+
+            var base64 = base64Images.noSchool;
+            if (school.schoolLogo != null)
+                base64 = await toBase64(school.schoolLogo);
+
+            this.developer.education[schoolIndex].schoolLogo = this.getImageObjectFromBase64(base64);
         }
 
         // Company Logos
         for (var companyIndex in this.developer.experience) {
             var company = this.developer.experience[companyIndex];
-            if (company.companyLogo != null) {
-                this.developer.experience[companyIndex].companyLogo = this.getImageObjectFromBase64(await toBase64(company.companyLogo));
-            } else {
-                delete this.developer.experience[companyIndex].companyLogo;
-            }
+
+            var base64 = base64Images.noSchool;
+            if (company.companyLogo != null)
+                base64 = await toBase64(company.companyLogo);
+
+            this.developer.experience[companyIndex].companyLogo = this.getImageObjectFromBase64(base64);
         }
 
         // Add social media links
@@ -388,7 +389,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
     }
 
     /**
-     * @param {String} base64
+     * @param {String} base64 is a base64 string or url to image to make base64
      */
     getImageObjectFromBase64(base64) {
         var type = base64.substring(base64.indexOf('/') + 1, base64.indexOf(';base64'));
