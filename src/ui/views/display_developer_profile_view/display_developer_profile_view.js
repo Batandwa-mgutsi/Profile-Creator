@@ -329,7 +329,11 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
         for (var softSkill in developer.softSkills)
             sum += developer.softSkills[softSkill].rating;
 
-        return sum / (developer.hardSkills.length + developer.softSkills.length);
+        var divider = developer.hardSkills.length + developer.softSkills.length;
+        if (divider === 0)
+            return 0;
+        else
+            return sum / divider;
 
     }
 
