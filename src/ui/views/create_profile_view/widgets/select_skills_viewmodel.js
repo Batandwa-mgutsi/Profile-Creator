@@ -67,7 +67,7 @@ export default class SelectSkillsViewModel extends BaseViewModel {
         var output = [];
         for (var skillIndex in this.unselectedSkills) {
             console.log(this.unselectedSkills[skillIndex]);
-            if (this.unselectedSkills[skillIndex].name.includes(this.nameFilter))
+            if (this.unselectedSkills[skillIndex].name.toLowerCase().includes(this.nameFilter.toLowerCase()))
                 output.push(this.unselectedSkills[skillIndex]);
         }
 

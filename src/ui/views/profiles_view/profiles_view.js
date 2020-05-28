@@ -22,12 +22,24 @@ class ProfilesView extends ViewModelConsumer {
     onRender(props, model) {
         return <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: '#FBFBFB' }}>
             <nav style={{ top: 0, display: 'fix' }}>
-                <div className='nav-wrapper indigo darken-4'>
-                    <a href='#!' className='brand-logo left' style={{ marginLeft: 20 }}>Profile Creator</a>
-                    <ul className='right hide-on-med-and-down'>
-                        <li><a href='#!' onClick={(e) => props.history.push('/content')}>Content</a></li>
-                        <li><a href="/">Log Out</a></li>
-                    </ul>
+                <div className='row nav-wrapper indigo darken-4'>
+                    <div className='col s4'>
+                        <a href='#!' className='brand-logo left' style={{ marginLeft: 20 }}>Profile Creator</a>
+                    </div>
+                    <div className='center col s4'>
+                        <input
+                            placeholder='search profile'
+                            style={{ color: 'white' }}
+                            onChange={(e) => model.setNameFilter(e.target.value)}
+                        />
+                    </div>
+                    <div className='col s4'>
+                        <ul className='right hide-on-med-and-down'>
+                            <li><a href='#!' onClick={(e) => props.history.push('/content')}>Content</a></li>
+                            <li><a href="/">Log Out</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </nav>
             {model.isBusy() ?

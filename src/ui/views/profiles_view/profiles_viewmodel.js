@@ -33,7 +33,7 @@ export default class ProfilesViewModel extends AuthenticatedViewModel {
         for (var developerIndex in this.developers) {
             var developer = this.developers[developerIndex];
             var fullName = developer.firstName + developer.lastName;
-            if (fullName.includes(this.nameFilter))
+            if (fullName.toLowerCase().includes(this.nameFilter.toLowerCase()))
                 output.push(developer);
         }
 
