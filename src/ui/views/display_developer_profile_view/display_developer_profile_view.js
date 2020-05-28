@@ -308,7 +308,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
     * @param {DisplayDeveloperProfileViewModel} model
     */
     onModelReady(model) {
-        model.onInitView(this.props.match.params.id);
+        model.onInitView(this.props.match.params.name, this.props.match.params.id);
     }
 
     /** 

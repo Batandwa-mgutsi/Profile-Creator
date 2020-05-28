@@ -51,5 +51,5 @@ export function getCurrentOccupation(developer) {
  * @return {String}
  */
 export function getDeveloperFullName(developer) {
-    return developer.firstName + ' ' + developer.lastName;
+    return (developer.firstName + ' ' + developer.lastName).trim();
 }
