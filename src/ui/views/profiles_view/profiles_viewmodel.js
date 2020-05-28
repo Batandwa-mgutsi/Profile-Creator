@@ -37,6 +37,7 @@ export default class ProfilesViewModel extends AuthenticatedViewModel {
                 output.push(developer);
         }
 
+        output.reverse();
         return output;
     }
 
