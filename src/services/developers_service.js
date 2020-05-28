@@ -32,10 +32,12 @@ export class DevelopersService {
      */
     async updateProfile(id, newProfileData) {
         var profile = await developersApi.updateProfile(id, newProfileData, await authenticationService.getCurrentUser());
-        for (var index in this.cachedProfiles) {
-            if (this.cachedProfiles[index]._id === profile._id) {
-                this.cachedProfiles[index] = profile;
-                break;
+        if (profile) {
+            for (var index in this.cachedProfiles) {
+                if (this.cachedProfiles[index]._id === profile._id) {
+                    this.cachedProfiles[index] = profile;
+                    break;
+                }
             }
         }
 

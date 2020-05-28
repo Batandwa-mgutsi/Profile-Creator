@@ -5,13 +5,13 @@ import {
     getSelectableSoftSkills, getTechnicalSkillIconById, getHobbyIconById
 } from '../../common/skills';
 import React from 'react';
+import { withCookies, Cookies, useCookies } from 'react-cookie';
 import { ViewModelConsumer } from '../../../mvvm';
 import '../../../materialize/css/materialize.css';
 
 import NoProfilePictureImg from '../../../image_assets/no_profile_picture.png'
 import YouTubeIcon from '../../../image_assets/youtube.png';
 import GithubIcon from '../../../image_assets/github.png';
-import Runninng from '../../../image_assets/skill_icons/running.png'
 
 import { Dialog, DialogOverlay } from "@reach/dialog";
 import "@reach/dialog/styles.css";
@@ -27,7 +27,7 @@ import IconifiedSkillDisplay from '../../shared_widgets/iconified_skill_display'
 import SoftSkillDisplay from '../../shared_widgets/soft_skill_display'
 import HardSkillDisplay from '../../shared_widgets/hard_skill_display'
 
-export default class CreateProfileView extends ViewModelConsumer {
+class CreateProfileView extends ViewModelConsumer {
     constructor(props) {
         super(props, new CreateProfileViewModel());
     }
@@ -364,3 +364,5 @@ export default class CreateProfileView extends ViewModelConsumer {
         return <h1>{company.companyName}</h1>
     }
 }
+
+export default withCookies(CreateProfileView);
