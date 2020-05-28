@@ -59,6 +59,7 @@ class ProfilesView extends ViewModelConsumer {
                                         <div className='col s12'>
                                             <div className='col' style={{ float: 'right', paddingTop: '10px' }}>
                                                 <a href='#!' className='btn-flat waves-effect waves-light'
+                                                    onClick={(e) => props.history.push(`/editProfile/${getDeveloperFullName(developer)}/${developer._id}/`)}
                                                     style={{
                                                         marginRight: '10px',
                                                         color: '#26A69AFA',

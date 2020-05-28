@@ -44,7 +44,8 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                         {model.userCanEditProfile ?
                             <li>
                                 <a href='#!'
-                                    onClick={(e) => props.history.push(`/profile/${getDeveloperFullName(model.developer)}/${model.developer._id}/`)}>Edit
+                                    onClick={(e) => props.history.push(`/editProfile/${getDeveloperFullName(model.developer)}/${model.developer._id}/`)} >
+                                    >Edit
                                 </a>
                             </li>
                             : <li><a href="/">Log In</a></li>

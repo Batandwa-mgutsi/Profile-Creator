@@ -83,7 +83,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                                     model.developer.education.map((school) => {
                                         return <div>
                                             <div className='col s11'>
-                                                <SchoolDisplayView key={school.schoolName.concat(school.schoolLocation)} school={school} schoolLogoIsFile={school.schoolLogo != null} />
+                                                <SchoolDisplayView key={school.schoolName.concat(school.schoolLocation)} school={school} schoolLogoIsFile={typeof (school.schoolLogo) === 'file'} />
                                             </div>
                                             <div className='col s1'>
                                                 h
@@ -111,7 +111,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                                     model.developer.experience.map((company) => {
                                         return <div>
                                             <div className='col s11'>
-                                                <CompanyDisplayView key={company.companyName} company={company} companyNameIsFile={company.companyLogo != null} />
+                                                <CompanyDisplayView key={company.companyName} company={company} companyNameIsFile={typeof (company.companyLogo) === 'file'} />
                                             </div>
                                             <div className='col s1'>
                                                 h
@@ -155,7 +155,7 @@ export default class CreateProfileView extends ViewModelConsumer {
                             <h4 style={this.getSectionHeaderStyle()} >Hobies/Extra - Curricular Activities</h4>
 
                             {
-                                model.developer.hobies.map((hobbyId) => {
+                                model.developer.hobbies.map((hobbyId) => {
                                     var icon = getHobbyIconById(hobbyId);
                                     return <div className='col'>
                                         {IconifiedSkillDisplay(icon, hobbyId)}
@@ -326,6 +326,19 @@ export default class CreateProfileView extends ViewModelConsumer {
                 </DialogOverlay>
             </div>
         </div>
+    }
+
+    /**
+     * 
+     * @param {CreateProfileViewModel} model 
+     */
+    onModelReady(model) {
+        var fullName = this.props.match.params.name;
+        var id = this.props.match.params.id;
+
+        // If both name and id are given, populate for view for editing the profile
+        if (fullName !== undefined && id !== undefined)
+            model.populateForEditing(fullName, id)
     }
 
     getSectionHeaderStyle() {

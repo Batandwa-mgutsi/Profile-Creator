@@ -11,6 +11,7 @@ const routes = <Router>
     <Route path='/' component={App} >
         <Route exact path='/' component={LoginView} />
         <Route path='/createProfile' component={CreateProfileView} />
+        <Route path='/editProfile/:name/:id' component={CreateProfileView} />
         <Route path='/profiles' component={ProfilesView} />
         <Route path='/profile/:name/:id' component={DisplayDeveloperProfileView} />
     </Route>

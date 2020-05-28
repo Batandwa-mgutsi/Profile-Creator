@@ -13,6 +13,14 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
 
     constructor() {
         super();
+
+        this.isInEditMode = false; // populateForEditing
+        this.endpointData = {
+            fullName: null,
+            id: null,
+        }
+
+
         this.dialogToShow = DialogToShow.none;
         this.youtubeLink = '';
         this.githubLink = '';
@@ -27,7 +35,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
             education: [],
             experience: [],
             technicalSkills: [],
-            hobies: [],
+            hobbies: [],
             hardSkills: [],
             softSkills: [],
         }
@@ -163,10 +171,10 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
     }
 
     /**
-     * @param {Array<String>} hobies
+     * @param {Array<String>} hobbies
      */
-    addHobiesFromArray(hobies) {
-        this.developer.hobies = this.developer.hobies.concat(hobies);
+    addHobiesFromArray(hobbies) {
+        this.developer.hobbies = this.developer.hobbies.concat(hobbies);
         this.notifyListeners(this);
     }
 
@@ -190,7 +198,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
      * @param {String} hobby
      */
     addHobby(hobby) {
-        this.developer.hobies.push(hobby);
+        this.developer.hobbies.push(hobby);
         this.notifyListeners(this);
     }
 
@@ -199,7 +207,7 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
      * @param {String} hobby 
      */
     removeHobby(hobby) {
-        this.developer.hobies = this.developer.hobies.splice(this.developer.hobies.findIndex((hby) => hby === hobby), 1);
+        this.developer.hobbies = this.developer.hobbies.splice(this.developer.hobbies.findIndex((hby) => hby === hobby), 1);
         this.notifyListeners(this);
     }
 
@@ -316,6 +324,85 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
     }
 
     /**
+     * Popuilates the view for editing the given developer.
+     * 
+     * When the user taps the save button, it will update the profile of this developer instead of
+     * creating a new one.
+     * 
+     * @param {String} fullName
+     * @param {NUmber}  id
+     */
+    async populateForEditing(fullName, id) {
+        this.setBusy(true);
+        this.notifyListeners(this);
+
+        this.isInEditMode = true;
+        this.endpointData = {
+            fullName: fullName,
+            id: id,
+        };
+
+
+
+        // Fetch the profile to edit
+        try {
+            this.developer = await developersService.getPublicProfile(fullName, id);
+            console.log(this.developer);
+
+            var getSocialMediaLink = (socialMediaId) => {
+                return this.developer.socialMedia.find((service) => service.name === socialMediaId).link;
+            }
+
+            this.youtubeLink = getSocialMediaLink('youtube');
+            this.githubLink = getSocialMediaLink('github');
+
+            if (this.developer.firstName === undefined)
+                this.developer.firstName = '';
+
+            if (this.developer.lastName === undefined)
+                this.developer.lastName = '';
+
+            if (this.developer.shortBiography === undefined)
+                this.developer.shortBiography = '';
+
+            if (this.developer.isPublic === undefined)
+                this.developer.isPublic = true;
+
+            if (this.developer.profilePicture === undefined)
+                this.developerprofilePicture = null;
+
+            if (this.developer.socialMedia === undefined)
+                this.developer.socialMedia = [];
+
+            if (this.developer.education === undefined)
+                this.developer.education = [];
+
+            if (this.developer.experience === undefined)
+                this.developer.experience = [];
+
+            if (this.developer.technicalSkills === undefined)
+                this.developer.technicalSkills = [];
+
+            if (this.developer.hobbies === undefined)
+                this.developer.hobbies = [];
+
+            if (this.developer.hardSkills === undefined)
+                this.developer.hardSkills = [];
+
+            if (this.developer.softSkills === undefined)
+                this.developer.softSkills = [];
+
+        } catch (e) {
+            console.log(e);
+            console.trace();
+            alert('Error ' + e.message);
+        }
+
+        this.setBusy(false);
+        this.notifyListeners(this);
+    }
+
+    /**
      * Save the developer profile
      */
     async saveProfile(history) {
@@ -330,10 +417,11 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
             reader.onerror = error => reject(error);
         });
 
+
         // Profile Picture
-        if (this.developer.profilePicture != null) {
+        if (typeof (this.developer.profilePicture) === 'file') {
             this.developer.profilePicture = this.getImageObjectFromBase64(await toBase64(this.developer.profilePicture));
-        } else {
+        } else if (!this.isInEditMode) {
             this.developer.profilePicture = this.getImageObjectFromBase64(base64Images.noProfilePicture);
         }
 
@@ -342,10 +430,10 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
             var school = this.developer.education[schoolIndex];
 
             var base64 = base64Images.noSchool;
-            if (school.schoolLogo != null)
+            if (typeof (school.schoolLogo) === 'file')
                 base64 = await toBase64(school.schoolLogo);
-
-            this.developer.education[schoolIndex].schoolLogo = this.getImageObjectFromBase64(base64);
+            else if (!this.isInEditMode)
+                this.developer.education[schoolIndex].schoolLogo = this.getImageObjectFromBase64(base64);
         }
 
         // Company Logos
@@ -353,10 +441,10 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
             var company = this.developer.experience[companyIndex];
 
             var base64 = base64Images.noSchool;
-            if (company.companyLogo != null)
+            if (typeof (company.companyLogo) === 'file')
                 base64 = await toBase64(company.companyLogo);
-
-            this.developer.experience[companyIndex].companyLogo = this.getImageObjectFromBase64(base64);
+            else if (!this.isInEditMode)
+                this.developer.experience[companyIndex].companyLogo = this.getImageObjectFromBase64(base64);
         }
 
         // Add social media links
@@ -376,7 +464,12 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
 
         try {
             console.log(this.developer);
-            await developersService.createProfile(this.developer);
+
+            if (this.isInEditMode)
+                await developersService.updateProfile(this.endpointData.id, this.developer);
+            else
+                await developersService.createProfile(this.developer);
+
             history.push('/profiles');
         } catch (e) {
             console.log(e);
