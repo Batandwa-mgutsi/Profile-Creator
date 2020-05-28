@@ -53,3 +53,11 @@ export function getCurrentOccupation(developer) {
 export function getDeveloperFullName(developer) {
     return (developer.firstName + ' ' + developer.lastName).trim();
 }
+
+/**
+ * 
+ * @param {String} fileName 
+ */
+export function getImageUrl(fileName) {
+    return `https://javaprime-week1-api.herokuapp.com/${fileName}`;
+}

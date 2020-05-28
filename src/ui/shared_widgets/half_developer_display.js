@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCurrentOccupation, getDeveloperFullName } from '../common/utils';
+import { getCurrentOccupation, getDeveloperFullName, getImageUrl } from '../common/utils';
 
 /**
  * A view that only displays the given developers profile picture, name, company, and shortBiography.
@@ -10,7 +10,7 @@ import { getCurrentOccupation, getDeveloperFullName } from '../common/utils';
 export default function HalfDeveloperDisplay(props) {
     return <div>
         <div className='col s4'>
-            <img src={props.developer?.profilePicture} style={{ maxHeight: '210px', maxWidth: '210px', borderRadius: '50%' }} />
+            <img src={getImageUrl(props.developer?.profilePicture)} style={{ maxHeight: '210px', maxWidth: '210px', borderRadius: '50%' }} />
         </div>
         <div className='col s8'>
             <div className='col s12' style={{ fontWeight: 'bold', fontSize: '20px', color: '#051F74FA' }}>

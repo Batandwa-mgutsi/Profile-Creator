@@ -1,6 +1,6 @@
 import React from 'react';
 import { School } from '../common/models';
-import { displayImage } from '../common/utils'
+import { getImageUrl } from '../common/utils';
 
 import GraduationIcon from '../../image_assets/graduation_hat.png';
 import AchievementsIcom from '../../image_assets/achievements.png';
@@ -22,7 +22,7 @@ export default class SchoolDisplayView extends React.Component {
     render() {
         return <div className='row' >
             <div className='col s4'>
-                <img id={this.getLogoElemId()} className='responsive-img' src={this.props.school?.schoolLogo == null ? NoSchoolLogo : (!this.props.schoolLogoIsFile && this.props.school?.schoolLogo)} />
+                <img id={this.getLogoElemId()} className='responsive-img' src={this.props.school?.schoolLogo == null ? NoSchoolLogo : (!this.props.schoolLogoIsFile && getImageUrl(this.props.school?.schoolLogo))} />
             </div>
             <div className='col s8'>
                 <div className='col s12' style={{ fontWeight: 'medium', fontSize: '1.4vw', color: '#051F74FA' }}>

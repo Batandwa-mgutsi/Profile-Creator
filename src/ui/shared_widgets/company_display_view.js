@@ -2,6 +2,8 @@ import React from 'react';
 import { Company } from '../common/models';
 import NoSchoolLogo from '../../image_assets/no_school_logo.png';
 
+import { getImageUrl } from '../common/utils';
+
 /**
  * Displays the information of the given company
  * @param {Company} company - in props
@@ -18,7 +20,7 @@ export default class CompanyDisplayView extends React.Component {
     render() {
         return <div className='row' >
             <div className='col s4'>
-                <img id={this.getLogoElemId()} className='responsive-img' src={this.props.company?.companyLogo == null ? NoSchoolLogo : (!this.props.companyLogoIsFile && this.props.company?.companyLogo)} />
+                <img id={this.getLogoElemId()} className='responsive-img' src={this.props.company?.companyLogo == null ? NoSchoolLogo : (!this.props.companyLogoIsFile && getImageUrl(this.props.company?.companyLogo))} />
             </div>
             <div className='col s8'>
                 <div className='col s12' style={{ fontWeight: 'bold', fontSize: '1.4vw', color: '#051F74FA' }}>
