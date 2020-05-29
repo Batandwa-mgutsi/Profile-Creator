@@ -486,10 +486,10 @@ export class CreateProfileViewModel extends AuthenticatedViewModel {
      */
     getImageObjectFromBase64(base64) {
         var type = base64.substring(base64.indexOf('/') + 1, base64.indexOf(';base64'));
-        console.log(type);
+        var data = base64.substring(base64.indexOf(',/') + 2);
         return {
             type: type,
-            data: base64,
+            data: data,
         };
     }
 }
