@@ -59,5 +59,5 @@ export function getDeveloperFullName(developer) {
  * @param {String} fileName 
  */
 export function getImageUrl(fileName) {
-    return `https://javaprime-week1-api.herokuapp.com/${fileName}`;
+    return `https://javaprime-week1-api.herokuapp.com/images/${fileName}`;
 }
