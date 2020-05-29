@@ -7,15 +7,16 @@
  * @param {Map} headers
  * @param {String} keyToReturn
  */
-export async function get(url, keyToReturn, headers = {}) {
-    headers['Content-Type'] = 'application/json';
-    headers['Accept'] = 'application/json';
-    headers['Cookie'] = document.cookie;
+export async function get(url, keyToReturn, headers = new Map()) {
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json');
+    headers.set('Cookie', document.cookie);
 
     const response = await fetch(url, {
         credentials: 'include',
         withCredentials: true,
-        headers: headers,
+        mode: 'cors',
+        headers: getMapAsObject(headers),
     });
 
     console.log('Response: ', response);
@@ -34,7 +35,7 @@ export async function get(url, keyToReturn, headers = {}) {
  * @param {any} data
  * @param {String} keyToReturn
  */
-export async function post(url, data, keyToReturn, headers = {}) {
+export async function post(url, data, keyToReturn, headers = new Map()) {
     return await _fetchWithData(url, 'POST', data, keyToReturn, headers);
 }
 
@@ -48,7 +49,7 @@ export async function post(url, data, keyToReturn, headers = {}) {
  * @param {any} data
  * @param {String} keyToReturn
  */
-export async function patch(url, data, keyToReturn, headers = {}) {
+export async function patch(url, data, keyToReturn, headers = new Map()) {
     return await _fetchWithData(url, 'PATCH', data, keyToReturn, headers);
 }
 
@@ -63,7 +64,7 @@ export async function patch(url, data, keyToReturn, headers = {}) {
  * @param {any} data
  * @param {String} keyToReturn
  */
-export async function put(url, data, keyToReturn, headers = {}) {
+export async function put(url, data, keyToReturn, headers = new Map()) {
     return await _fetchWithData(url, 'PUT', data, keyToReturn, headers);
 }
 
@@ -74,11 +75,10 @@ export async function put(url, data, keyToReturn, headers = {}) {
  * @param {any} data
  * @param {String} keyToReturn
  */
-async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
-    headers['Content-Type'] = 'application/json';
-    headers['Accept'] = 'application/json';
-    headers['Cookie'] = document.cookie;
-
+async function _fetchWithData(url, method, data, keyToReturn, headers = new Map()) {
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json');
+    headers.set('Cookie', document.cookie);
 
     console.log(data);
     const response = await fetch(url, {
@@ -86,7 +86,7 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
         method: method,
         mode: 'cors',
         withCredentials: true,
-        headers: headers,
+        headers: getMapAsObject(headers),
         body: JSON.stringify(data)
     });
     console.log('Response: ', response);
@@ -121,4 +121,17 @@ async function _checkForError(response, keyToReturn) {
 
         return value;
     }
+}
+
+/**
+ * @param {Map<String, any>} map
+ */
+function getMapAsObject(map) {
+    const obj = {};
+    for (let [key, value] of map) {
+        obj[key] = value;
+    }
+
+    console.log(obj);
+    return obj;
 }
