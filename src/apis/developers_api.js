@@ -1,4 +1,4 @@
-import { post, get, put} from './http_api'
+import { post, get, put } from './http_api'
 
 export class DevelopersApi {
     /**
@@ -25,7 +25,7 @@ export class DevelopersApi {
      * Returns the new developer profile on success, throws error message on error
      */
     async updateProfile(id, newProfileData, user) {
-        var endpoint = 'https://javaprime-week1-api.herokuapp.com/profiles/' + id;
+        var endpoint = 'https://javaprime-week1-api.herokuapp.com/editProfile/' + id;
         return put(endpoint, newProfileData, 'developer');
     }
 
