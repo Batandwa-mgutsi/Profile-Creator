@@ -157,7 +157,7 @@ class CreateProfileView extends ViewModelConsumer {
                             {
                                 model.developer.hobbies.map((hobbyId) => {
                                     var icon = getHobbyIconById(hobbyId);
-                                    return <div className='col'>
+                                    return <div className='col s2'>
                                         {IconifiedSkillDisplay(icon, hobbyId)}
                                     </div>
                                 })
