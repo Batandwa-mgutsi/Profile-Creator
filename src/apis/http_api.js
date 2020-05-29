@@ -84,6 +84,7 @@ async function _fetchWithData(url, method, data, keyToReturn, headers = {}) {
     const response = await fetch(url, {
         credentials: 'include',
         method: method,
+        mode: 'cors',
         withCredentials: true,
         headers: headers,
         body: JSON.stringify(data)
