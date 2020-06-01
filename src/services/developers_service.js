@@ -66,7 +66,12 @@ export class DevelopersService {
             }
         }
 
-        return await developersApi.getPublicProfile(name, id);
+        var data = await developersApi.getPublicProfile(name.replace(/ /g, ''), id);
+        if (data.length !== 0) {
+            return data[0].developer;
+        }
+
+        return null;
     }
 
 

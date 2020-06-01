@@ -49,3 +49,64 @@ export class SelectableSkill {
         this.iconSrc = iconSrc;
     }
 }
+
+export class Content {
+    /**
+     * 
+     * @param {Array<Topic>} topics 
+     */
+    constructor(topics) {
+        this.topics = topics;
+    }
+}
+
+export class Topic {
+    /**
+     * 
+     * @param {String} title 
+     * @param {String} description 
+     * @param {Array<any>} material 
+     */
+    constructor(title, description, material) {
+        this._id = title;
+        this.title = title;
+        this.description = description;
+        this.material = material;
+    }
+}
+
+export class VideoMaterial {
+    /**
+     * 
+     * @param {String} title 
+     * @param {String} description 
+     * @param {String} thumnailUrl 
+     * @param {String} videoUrl 
+     */
+    constructor(title, description, thumnailUrl, videoUrl) {
+        this.type = 'video';
+        this._id = title;
+        this.title = title;
+        this.description = description;
+        this.thumnailUrl = thumnailUrl;
+        this.videoUrl = videoUrl;
+    }
+}
+
+export class DeliverableMaterial {
+    /**
+     * 
+     * @param {String} title 
+     * @param {String} instructions 
+     * @param {Number} points 
+     * @param {String} dueDate 
+     */
+    constructor(title, instructions, points, dueDate) {
+        this.type = 'deliverable';
+        this._id = title;
+        this.title = title;
+        this.instructions = instructions;
+        this.points = points;
+        this.dueDate = dueDate;
+    }
+}

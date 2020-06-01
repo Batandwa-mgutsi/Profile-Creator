@@ -9,7 +9,8 @@ export default class AuthenticatedViewModel extends BaseViewModel {
     async onViewMounted() {
         if (!(await authenticationService.isUserSignedIn())) {
             // Force the user to the home screen where they can login.
-            window.location = '/';
+            // TODO- Enable when out of dev mode
+            // window.location = '/';
         }
     }
 }

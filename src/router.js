@@ -4,6 +4,8 @@ import CreateProfileView from './ui/views/create_profile_view/create_profile_vie
 import ProfilesView from './ui/views/profiles_view/profiles_view';
 import DisplayDeveloperProfileView from './ui/views/display_developer_profile_view/display_developer_profile_view';
 
+import ContentView from './ui/views/content_view/content_view';
+
 import React from 'react';
 import App from './App';
 
@@ -14,6 +16,7 @@ const routes = <Router>
         <Route path='/editProfile/:name/:id' component={CreateProfileView} />
         <Route path='/profiles' component={ProfilesView} />
         <Route path='/profile/:name/:id' component={DisplayDeveloperProfileView} />
+        <Route path='/content' component={ContentView} />
     </Route>
 </Router>
 
