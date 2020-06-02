@@ -1,0 +1,19 @@
+
+/**
+    A floating view is a view that elevates when the user mouse moves over it
+*/
+
+.floating-view:hover {
+    box-shadow: 0px 4px 10px #00000029;
+    border-radius: 20px;
+    cursor: move;
+}
+
+/**
+    Selectable list items
+**/
+
+.selectable-item:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
