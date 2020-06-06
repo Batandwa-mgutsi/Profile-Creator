@@ -31,7 +31,7 @@ export default class HardSkillDisplay extends ViewModelConsumer {
         }}>
             <div className='col s12' style={{ margin: 'auto' }}>
                 <div className='col s12'>
-                    <img className='responsive-img' src={getHardSkillIconById(props.hardSkill.id)} />
+                    <img src={getHardSkillIconById(props.hardSkill.id)} height='92px' />
                 </div>
                 <div className='col s12' style={{ textAlign: 'center' }}>
                     <StarRatings

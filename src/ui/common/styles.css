@@ -9,10 +9,21 @@
     cursor: move;
 }
 
+
 /**
     Selectable list items
 **/
 
 .selectable-item:hover {
     background-color: whitesmoke;
+}
+
+/**
+    For othe rUI selectable items
+**/
+.selectable-floating-view:hover {
+    background-color: whitesmoke;
+    box-shadow: 0px 4px 10px #00000029;
+    border-radius: 20px;
+    cursor: pointer;
 }

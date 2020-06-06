@@ -5,6 +5,8 @@ import { SelectableSkill } from '../../../common/models';
 
 import IconifiedSkillDisplay from '../../../shared_widgets/iconified_skill_display'
 
+import '../../../common/styles.css';
+
 export default class SelectSkillsView extends ViewModelConsumer {
     constructor(props) {
         super(props, new SelectSkillsViewModel(props.skills ?? []));
@@ -29,7 +31,7 @@ export default class SelectSkillsView extends ViewModelConsumer {
                 <div className='col s12'>
                     {
                         (model.getFilteredUnselectedSkills().slice().concat(model.selectedSkills)).map((skill) => {
-                            return <div key={skill.name} className='col s2' onClick={(e) => {
+                            return <div key={skill.name} className='col s2 selectable-floating-view' onClick={(e) => {
                                 model.isSelected(skill) ?
                                     model.unselectSkill(skill) : model.selectSkill(skill)
                             }}>

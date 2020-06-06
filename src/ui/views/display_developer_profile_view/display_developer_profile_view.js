@@ -17,6 +17,8 @@ import SoftSkillDisplay from '../../shared_widgets/soft_skill_display';
 
 import StarRatings from 'react-star-ratings';
 
+import '../../common/styles.css'
+
 import {
     getTechnicalSkillIconById, getHobbyIconById,
     getLanguages, getFrontends, getBackends, getDatabases, getMobileTools
@@ -146,7 +148,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                     <div className='col s12'>
                                         {
                                             model.developer.technicalSkills.map((skill) => {
-                                                return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                     {IconifiedSkillDisplay(getTechnicalSkillIconById(skill))}
                                                 </div>
                                             })
@@ -161,7 +163,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                     <div className='col s12'>
                                         {
                                             model.developer.hobbies.map((hobby) => {
-                                                return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                     {IconifiedSkillDisplay(getHobbyIconById(hobby), hobby)}
                                                 </div>
                                             })
@@ -194,7 +196,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                             <div className='col s12'>
                                                 {
                                                     getLanguages(model.developer.hardSkills).map((hardSkill) => {
-                                                        return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                        return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                             <HardSkillDisplay hardSkill={hardSkill} isEditable={false} />
                                                         </div>
                                                     })
@@ -209,7 +211,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                             <div className='col s12'>
                                                 {
                                                     getFrontends(model.developer.hardSkills).map((hardSkill) => {
-                                                        return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                        return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                             <HardSkillDisplay hardSkill={hardSkill} isEditable={false} />
                                                         </div>
                                                     })
@@ -224,7 +226,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                             <div className='col s12'>
                                                 {
                                                     getBackends(model.developer.hardSkills).map((hardSkill) => {
-                                                        return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                        return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                             <HardSkillDisplay hardSkill={hardSkill} isEditable={false} />
                                                         </div>
                                                     })
@@ -239,7 +241,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                             <div className='col s12'>
                                                 {
                                                     getDatabases(model.developer.hardSkills).map((hardSkill) => {
-                                                        return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                        return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                             <HardSkillDisplay hardSkill={hardSkill} isEditable={false} />
                                                         </div>
                                                     })
@@ -254,7 +256,7 @@ export default class DisplayDeveloperProfileView extends ViewModelConsumer {
                                             <div className='col s12'>
                                                 {
                                                     getMobileTools(model.developer.hardSkills).map((hardSkill) => {
-                                                        return <div className='col s2' style={{ marginTop: '10px' }}>
+                                                        return <div className='col s2 floating-view' style={{ marginTop: '10px' }}>
                                                             <HardSkillDisplay hardSkill={hardSkill} isEditable={false} />
                                                         </div>
                                                     })
