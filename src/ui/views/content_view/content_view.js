@@ -30,21 +30,30 @@ class ContentView extends ViewModelConsumer {
                 <div className="progress">
                     <div className="indeterminate"></div>
                 </div>
-                : <div>
-                    <div style={{ height: 15 }}></div>
-                    <div layout horizontal>
-                        <div style={{ backgroundColor: 'grey', width: '20%', float: 'left' }} >
-                            Hyperlinks here jodijoi  dsiooids  dsoijoijds  sdpojpojfds  sdpojpofd  dsoijo
-                    </div>
-                        <div style={{ width: '80%', float: 'right' }}>
+                : <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+                    <div style={{ overflow: 'auto' }}>
+                        <div style={{
+                            overflow: 'auto',
+                            position: 'fixed',
+                            paddingLeft: '20px',
+                            width: '20%',
+                            height: '100%',
+                            display: 'flex',
+                            alignContent: 'center',
+                            alignItems: 'center',
+                            float: 'left'
+                        }} >
+                            <HyperlinksView topics={model.allTopics()} />
+                        </div>
+                        <div style={{ width: '80%', float: 'right', overflow: 'auto' }}>
                             <div className='row'>
-                                <div className='col s12'>
+                                <div className='col s12' style={{ marginTop: '20px' }}>
                                     <a className="waves-effect waves-light btn-large" style={{ borderRadius: '20px' }}>
                                         <i class="material-icons left">add</i>Create
                                     </a>
                                 </div>
 
-                                <div className='col s12' style={{ overflow: 'auto', paddingTop: '20px', paddingBottom: '20px' }}>
+                                <div className='col s12' style={{ paddingTop: '20px', paddingBottom: '20px' }}>
                                     <div className='col s10'>
                                         {
                                             model.allTopics().map((topic) => {
@@ -74,7 +83,7 @@ class ContentView extends ViewModelConsumer {
  * @param {Function()} props.onEdit
  */
 function TopicView(props) {
-    return <div className='col s12' style={{ paddingTop: '50px', paddingBottom: '20px' }}>
+    return <div id={props.topic.title} className='col s12' style={{ paddingTop: '50px', paddingBottom: '20px' }}>
         <div className='col s12' style={{ paddingBottom: '10px', display: 'flex', alignItems: 'center' }}>
             <div className='col s11' style={{ fontSize: '2.5vw', color: '#051F74' }}>
                 {props.topic.title}
@@ -106,7 +115,7 @@ function TopicView(props) {
  * @param {Material} props.material
  */
 function MaterialView(props) {
-    return <div className='col s12 selectable-item' style={{ paddingLeft: '0px', paddingTop: '15px', paddingBottom: '15px' }}>
+    return <div id={props.material.title} className='col s12 selectable-item' style={{ paddingLeft: '0px', paddingTop: '15px', paddingBottom: '15px' }}>
         <div className='col s12' style={{ display: 'flex', alignItems: 'center' }}>
             <div className='col' >
                 <div style={{
@@ -126,6 +135,38 @@ function MaterialView(props) {
             </div>
         </div>
 
+    </div>
+}
+
+/**
+ * @param {Array<Topic>} props.topics
+ */
+function HyperlinksView(props) {
+    const linkStyle = {
+        color: '#707B7C',
+        fontSize: '1.2vw'
+    }
+    return <div style={{
+        flexDirection: 'column',
+    }}>
+        {
+            props.topics.map((topic) => {
+                return <div style={{ color: 'black' }}>
+                    <a href={`#${topic.title}`} style={linkStyle}>
+                        <p>{topic.title}</p>
+                    </a>
+                    <div style={{ paddingLeft: '10px' }}>
+                        {
+                            topic.material.map((material) => {
+                                return <a href={`#${material.title}`} style={linkStyle}>
+                                    <p>{material.title}</p>
+                                </a>
+                            })
+                        }
+                    </div>
+                </div>
+            })
+        }
     </div>
 }
 
