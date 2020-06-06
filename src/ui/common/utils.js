@@ -59,5 +59,6 @@ export function getDeveloperFullName(developer) {
  * @param {String} fileName 
  */
 export function getImageUrl(fileName) {
-    return `https://javaprime-week1-api.herokuapp.com/${fileName}`;
+    // return `https://javaprime-week1-api.herokuapp.com/${fileName}`;
+    return 'https://lafeber.com/pet-birds/wp-content/uploads/2020/03/macaw-face-px-ara-3695678-300x300.jpg'
 }
