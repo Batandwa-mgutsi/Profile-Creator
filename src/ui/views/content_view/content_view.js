@@ -7,6 +7,8 @@ import { Topic } from '../../common/models';
 
 import '../../common/styles.css';
 
+import M from 'materialize-css';
+
 class ContentView extends ViewModelConsumer {
     constructor(props) {
         super(props, new ContentViewModel());
@@ -48,8 +50,10 @@ class ContentView extends ViewModelConsumer {
                         <div style={{ width: '80%', float: 'right', overflow: 'auto' }}>
                             <div className='row'>
                                 <div className='col s12' style={{ marginTop: '20px' }}>
-                                    <a className="waves-effect waves-light btn-large" style={{ borderRadius: '20px' }}>
-                                        <i class="material-icons left">add</i>Create
+                                    <a className="waves-effect waves-light btn-large"
+                                        onClick={(e) => props.history.push('/newTopic')}
+                                        style={{ borderRadius: '20px' }}>
+                                        <i className="material-icons left">add</i>Create
                                     </a>
                                 </div>
 
@@ -74,40 +78,59 @@ class ContentView extends ViewModelConsumer {
 
         </div>
     }
+
+
 }
 
-/**
- * @param {Topic} props.topic
- * @param {Function()} props.onClick
- * @param {Function()} props.onDelete
- * @param {Function()} props.onEdit
- */
-function TopicView(props) {
-    return <div id={props.topic.title} className='col s12' style={{ paddingTop: '50px', paddingBottom: '20px' }}>
-        <div className='col s12' style={{ paddingBottom: '10px', display: 'flex', alignItems: 'center' }}>
-            <div className='col s11' style={{ fontSize: '2.5vw', color: '#051F74' }}>
-                {props.topic.title}
-            </div>
-            <div className='col s1'>
-                <div className='btn-flat waves-effect waves-light'>
-                    <i class="material-icons right" style={{ color: '#051F74', fontSize: '1.9vw' }}>more_vert</i>
+class TopicView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        M.AutoInit();
+    }
+
+    /**
+     * @param {Topic} props.topic
+     * @param {Function()} props.onClick
+     * @param {Function()} props.onDelete
+     * @param {Function()} props.onEdit
+     */
+    render() {
+        var props = this.props;
+        return <div id={props.topic.title} className='col s12' style={{ paddingTop: '50px', paddingBottom: '20px' }}>
+
+            <div className='col s12' style={{ paddingBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                <div className='col s11' style={{ fontSize: '2.5vw', color: '#051F74' }}>
+                    {props.topic.title}
+                </div>
+                <div className='col s1'>
+                    <div href='#' id='menu-trigger' className='dropdown-trigger btn-flat waves-effect waves-light' data-target='topic-menu-target'>
+                        <i className="material-icons right" style={{ color: '#051F74', fontSize: '1.9vw' }}>more_vert</i>
+                    </div>
+                    <ul id='topic-menu-target' className='dropdown-content'>
+                        <li><a href="#!">Edit</a></li>
+                        <li><a href="#!">Delete</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
 
-        <div className='col s12 divider orange' />
+            <div className='col s12 divider orange' />
 
-        <div className='col s12'>
-            {
-                props.topic.material.map((material) => {
-                    return <div className='col s12' style={{ cursor: 'pointer' }}>
-                        <MaterialView material={material} />
-                        <div className='col s12 divider' />
-                    </div>
-                })
-            }
+            <div className='col s12'>
+                {
+                    props.topic.material.map((material) => {
+                        return <div className='col s12' style={{ cursor: 'pointer' }}>
+                            <MaterialView material={material} />
+                            <div className='col s12 divider' />
+                        </div>
+                    })
+                }
+            </div>
         </div>
-    </div>
+    }
+
 }
 
 /**
@@ -127,7 +150,7 @@ function MaterialView(props) {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <i class="material-icons" style={{ color: 'white', }}>inbox</i>
+                    <i className="material-icons" style={{ color: 'white', }}>inbox</i>
                 </div>
             </div>
             <div style={{ color: '#333333', fontSize: '1.3vw', fontWeight: '500' }}>

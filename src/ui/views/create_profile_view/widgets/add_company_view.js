@@ -1,7 +1,6 @@
 import React from 'react';
 import AddCompanyViewModel from './add_company_viewmodel';
 import { ViewModelConsumer } from '../../../../mvvm';
-import '../../../../materialize/css/materialize.css';
 
 export default class AddCompanyView extends ViewModelConsumer {
     constructor(props) {

@@ -1,4 +1,3 @@
-import '../../../../materialize/css/materialize.css';
 import { SoftSkill } from '../../../common/models';
 import React from 'react';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import AddSchoolViewModel from './add_school_viewmodel';
 import { ViewModelConsumer } from '../../../../mvvm';
-import '../../../../materialize/css/materialize.css';
 
 import NoSchoolLogo from '../../../../image_assets/no_school_logo.png';
 

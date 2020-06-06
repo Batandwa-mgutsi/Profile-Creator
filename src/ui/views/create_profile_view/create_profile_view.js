@@ -7,7 +7,6 @@ import {
 import React from 'react';
 import { withCookies, Cookies, useCookies } from 'react-cookie';
 import { ViewModelConsumer } from '../../../mvvm';
-import '../../../materialize/css/materialize.css';
 
 import NoProfilePictureImg from '../../../image_assets/no_profile_picture.png'
 import YouTubeIcon from '../../../image_assets/youtube.png';
