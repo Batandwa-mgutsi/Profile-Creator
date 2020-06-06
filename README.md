@@ -1,15 +1,23 @@
 # Profile Creator
 
+The nr1 tool to manage developer profiles.
+
+NB: The backend is a separate git repo. This separation allows a smoother workflow. The backend is located at https://github.com/TumoM/DevJav2020Week1API
+
+Enjoy 😄
+
 - [x] Admin login screen (once logged in, it should be redirected to
 /profiles route 10
 - [x] /createProfile route to take inputs required to populate the profile 35
 - [x] /profile/:name/:id route to display profile that is a public link that can be shared 20
 - [x] Accuracy of matching created profile with provided PDF 100
-- [ ] /editProfile/:name/:id route to edit profile and save changes that will be reflected on /generatedProfile/:name/:id 30
+- [x] /editProfile/:name/:id route to edit profile and save changes that will be reflected on /generatedProfile/:name/:id 30
 - [x] /profiles route to view all profiles created with a dynamic search to search by name of profile (there should be 2 buttons, View or Edit that will redirect to relevant routes) 40
 - [x] Header with Logout button, Profiles button, and Create Profile button 10
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
+
+## Running the App
 
 ## Available Scripts
 
